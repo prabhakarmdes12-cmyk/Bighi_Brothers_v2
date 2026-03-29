@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#FAF7F2"/>
+  <rect x="50" y="50" width="500" height="500" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="2" rx="8"/>
+  <text x="300" y="280" font-family="Arial, sans-serif" font-size="24" fill="#999" text-anchor="middle">Lip Balm</text>
+  <text x="300" y="320" font-family="Arial, sans-serif" font-size="16" fill="#BBB" text-anchor="middle">Product Image Placeholder</text>
+  <text x="300" y="350" font-family="Arial, sans-serif" font-size="14" fill="#CCC" text-anchor="middle">600 x 600 px</text>
+</svg>
