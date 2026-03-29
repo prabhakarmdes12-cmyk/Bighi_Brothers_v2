@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marigold Mountain Soap — Bighi Brothers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5EFE0; --forest:#1C3A2E; --forest2:#162D24;
+  --amber:#C8831A; --amberl:#E8A830;
+  --offwhite:#FAF7F2; --charcoal:#2D2D2D; --warm:#8C8070;
+  --border:rgba(28,58,46,0.11);
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:auto}
+body{font-family:'EB Garamond',serif;background:var(--forest2);color:var(--charcoal);overflow-x:hidden;cursor:none}
+
+/* Custom Cursor */
+#cur{position:fixed;width:10px;height:10px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9996;transform:translate(-50%,-50%);transition:width .4s var(--ease),height .4s var(--ease)}
+#cur-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(200,131,26,0.5);border-radius:50%;pointer-events:none;z-index:9995;transform:translate(-50%,-50%);transition:width .5s var(--ease),height .5s var(--ease)}
+body.cursor-link #cur{width:14px;height:14px;background:var(--forest)}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:18px 64px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(22,45,36,0.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(245,239,224,0.07);transition:all .4s var(--ease);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--cream);text-decoration:none;font-weight:500}
+.nav-center{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-center a{
+  font-family:'Cormorant Garamond',serif;font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(245,239,224,0.7);text-decoration:none;position:relative;transition:color .3s;
+}
+.nav-center a:hover,.nav-center a.active{color:var(--amberl)}
+.nav-center a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--amber);transform:scaleX(0);transition:transform .35s var(--ease)}
+.nav-center a:hover::after,.nav-center a.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-cart{position:relative;background:none;border:none;cursor:pointer;color:rgba(245,239,224,0.8);font-size:1.1rem;padding:6px}
+.nav-cart:hover{color:var(--amberl)}
+.cart-badge{position:absolute;top:0;right:0;width:16px;height:16px;background:var(--amber);border-radius:50%;font-family:'DM Mono',monospace;font-size:0.55rem;color:white;display:flex;align-items:center;justify-content:center}
+.cart-badge.show{opacity:1;transform:scale(1)}
+.nav-cta{background:var(--amber);color:white;font-family:'Cormorant Garamond',serif;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;padding:9px 20px;border-radius:1px;text-decoration:none;transition:background .3s}
+.nav-cta:hover{background:var(--forest)}
+
+/* PRODUCT HERO */
+.pdp-hero{
+  display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:70px;
+}
+.pdp-gallery{
+  position:sticky;top:70px;height:calc(100vh - 70px);overflow:hidden;
+  background:var(--forest);
+}
+.pdp-main-img{width:100%;height:100%;object-fit:cover}
+.pdp-gallery-badge{
+  position:absolute;top:20px;left:20px;
+  font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--amber);color:white;padding:6px 14px;border-radius:100px;
+}
+.pdp-batch{
+  position:absolute;bottom:20px;left:20px;
+  background:rgba(22,45,36,0.9);backdrop-filter:blur(8px);
+  border:1px solid rgba(245,239,224,0.1);padding:10px 16px;border-radius:2px;
+}
+.pdp-batch-num{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--amber);margin-bottom:2px}
+.pdp-batch-date{font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(245,239,224,0.5)}
+
+.pdp-info{
+  padding:48px 56px 80px;overflow-y:auto;
+}
+.pdp-breadcrumb{
+  display:flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(245,239,224,0.4);margin-bottom:20px;
+}
+.pdp-breadcrumb a{color:rgba(245,239,224,0.4);text-decoration:none;transition:color .3s}
+.pdp-breadcrumb a:hover{color:var(--amberl)}
+.pdp-eyebrow{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+.pdp-name{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);color:var(--cream);font-weight:700;line-height:1.1;margin-bottom:10px}
+.pdp-tagline{font-size:1rem;font-style:italic;color:rgba(245,239,224,0.6);margin-bottom:20px;line-height:1.6}
+.pdp-rating{display:flex;align-items:center;gap:8px;margin-bottom:24px}
+.pdp-stars{color:var(--amber);font-size:0.85rem;letter-spacing:2px}
+.pdp-review-count{font-family:'DM Mono',monospace;font-size:0.65rem;color:rgba(245,239,224,0.4)}
+
+.pdp-pricing{margin-bottom:28px}
+.pdp-price{font-family:'Playfair Display',serif;font-size:2rem;color:var(--amberl)}
+.pdp-mrp{font-family:'DM Mono',monospace;font-size:0.85rem;color:rgba(245,239,224,0.35);text-decoration:line-through;margin-left:12px}
+.pdp-save{font-family:'DM Mono',monospace;font-size:0.62rem;background:rgba(39,174,96,0.2);color:var(--green);padding:3px 10px;border-radius:100px;margin-left:10px}
+
+.pdp-stock{font-family:'DM Mono',monospace;font-size:0.65rem;color:rgba(245,239,224,0.5);margin-bottom:20px}
+.pdp-stock span{color:var(--amber)}
+
+/* Ingredients */
+.pdp-ingredients{margin-bottom:28px}
+.pdp-ing-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,239,224,0.4);margin-bottom:10px}
+.pdp-ing-chips{display:flex;gap:6px;flex-wrap:wrap}
+.pdp-ing-chip{
+  font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.06em;
+  background:rgba(200,131,26,0.15);border:1px solid rgba(200,131,26,0.3);
+  color:rgba(245,239,224,0.85);padding:4px 12px;border-radius:100px;
+  cursor:pointer;transition:all .3s;
+}
+.pdp-ing-chip:hover{background:rgba(200,131,26,0.25);border-color:var(--amber)}
+
+/* Variant Selection */
+.pdp-variants{margin-bottom:28px}
+.pdp-var-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,239,224,0.4);margin-bottom:10px}
+.pdp-var-options{display:flex;gap:10px}
+.pdp-var-btn{
+  background:rgba(245,239,224,0.05);border:1px solid rgba(245,239,224,0.15);
+  color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:0.85rem;
+  padding:10px 20px;border-radius:2px;cursor:pointer;transition:all .3s;
+}
+.pdp-var-btn:hover,.pdp-var-btn.active{border-color:var(--amber);background:rgba(200,131,26,0.1)}
+
+/* Quantity */
+.pdp-quantity{margin-bottom:28px}
+.pdp-qty-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,239,224,0.4);margin-bottom:10px}
+.pdp-qty-control{display:flex;align-items:center;gap:0;width:fit-content}
+.pdp-qty-btn{
+  background:rgba(245,239,224,0.05);border:1px solid rgba(245,239,224,0.15);
+  color:var(--cream);width:40px;height:40px;cursor:pointer;font-size:1.2rem;
+  transition:all .3s;
+}
+.pdp-qty-btn:hover{background:rgba(200,131,26,0.1);border-color:var(--amber)}
+.pdp-qty-value{background:rgba(245,239,224,0.05);border-top:1px solid rgba(245,239,224,0.15);border-bottom:1px solid rgba(245,239,224,0.15);color:var(--cream);width:50px;height:40px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace}
+
+/* CTAs */
+.pdp-ctas{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.btn-add-routine{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--amber);color:white;
+  font-family:'Cormorant Garamond',serif;font-size:0.85rem;letter-spacing:0.16em;text-transform:uppercase;
+  padding:16px 32px;border:none;border-radius:2px;cursor:pointer;transition:all .3s;
+}
+.btn-add-routine:hover{background:var(--forest)}
+.btn-add-cart{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:transparent;color:var(--cream);
+  font-family:'Cormorant Garamond',serif;font-size:0.85rem;letter-spacing:0.16em;text-transform:uppercase;
+  padding:14px 32px;border:1px solid rgba(245,239,224,0.3);border-radius:2px;cursor:pointer;transition:all .3s;
+}
+.btn-add-cart:hover{border-color:var(--amber);color:var(--amber)}
+
+/* Refill reminder */
+.pdp-refill{
+  background:rgba(200,131,26,0.08);border:1px solid rgba(200,131,26,0.2);
+  padding:14px 18px;border-radius:2px;margin-bottom:32px;
+}
+.pdp-refill-text{font-size:0.85rem;color:rgba(245,239,224,0.7);margin-bottom:8px}
+.pdp-refill-check{display:flex;align-items:center;gap:8px;cursor:pointer}
+.pdp-refill-check input{accent-color:var(--amber)}
+.pdp-refill-label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;color:var(--amber)}
+
+/* Tabs */
+.pdp-tabs{display:flex;border-bottom:1px solid rgba(245,239,224,0.1);margin-bottom:24px}
+.pdp-tab{
+  background:none;border:none;border-bottom:2px solid transparent;
+  padding:12px 20px;font-family:'Cormorant Garamond',serif;font-size:0.82rem;
+  letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,224,0.4);cursor:pointer;transition:all .3s;
+}
+.pdp-tab.active{color:var(--amberl);border-bottom-color:var(--amber)}
+.pdp-tab-content{display:none;padding-bottom:20px}
+.pdp-tab-content.active{display:block}
+.pdp-tab-content p{font-size:0.92rem;color:rgba(245,239,224,0.7);line-height:1.8;margin-bottom:16px}
+.pdp-tab-content h4{font-family:'Cormorant Garamond',serif;font-size:0.85rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.pdp-tab-content ul{list-style:none;margin-bottom:16px}
+.pdp-tab-content ul li{font-size:0.88rem;color:rgba(245,239,224,0.7);padding:4px 0;padding-left:16px;position:relative}
+.pdp-tab-content ul li::before{content:'—';position:absolute;left:0;color:var(--amber)}
+
+/* Routine completion */
+.pdp-routine{margin-top:32px;padding-top:32px;border-top:1px solid rgba(245,239,224,0.1)}
+.pdp-routine-title{font-family:'Cormorant Garamond',serif;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(245,239,224,0.5);margin-bottom:16px}
+.pdp-routine-products{display:flex;flex-direction:column;gap:10px}
+.pdp-routine-product{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(245,239,224,0.03);border:1px solid rgba(245,239,224,0.08);
+  padding:12px;border-radius:2px;cursor:pointer;transition:all .3s;
+}
+.pdp-routine-product:hover{border-color:var(--amber)}
+.pdp-routine-product.completed{border-color:var(--green);background:rgba(39,174,96,0.05)}
+.pdp-rp-img{width:48px;height:48px;border-radius:2px;object-fit:cover}
+.pdp-rp-info{flex:1}
+.pdp-rp-step{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:2px}
+.pdp-rp-name{font-family:'Playfair Display',serif;font-size:0.9rem;color:var(--cream)}
+.pdp-rp-price{font-family:'Cormorant Garamond',serif;font-size:0.85rem;color:var(--amberl)}
+.pdp-rp-add{background:none;border:1px solid rgba(245,239,224,0.2);color:rgba(245,239,224,0.5);padding:6px 12px;border-radius:2px;font-family:'DM Mono',monospace;font-size:0.58rem;cursor:pointer;transition:all .3s}
+.pdp-routine-product.completed .pdp-rp-add{background:var(--green);border-color:var(--green);color:white}
+
+/* Reviews */
+.pdp-reviews{}
+.review-item{
+  background:rgba(245,239,224,0.03);border:1px solid rgba(245,239,224,0.08);
+  padding:20px;border-radius:2px;margin-bottom:12px;
+}
+.review-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.review-author{font-family:'Cormorant Garamond',serif;font-size:0.9rem;color:var(--cream);font-weight:500}
+.review-date{font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(245,239,224,0.4)}
+.review-stars{color:var(--amber);font-size:0.75rem}
+.review-text{font-size:0.88rem;color:rgba(245,239,224,0.7);line-height:1.6}
+
+/* STICKY BAR */
+.sticky-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:400;
+  background:var(--forest);padding:12px 64px;
+  display:flex;align-items:center;justify-content:space-between;
+  transform:translateY(100%);transition:transform .4s var(--ease);
+}
+.sticky-bar.show{transform:translateY(0)}
+.sticky-info{display:flex;align-items:center;gap:16px}
+.sticky-name{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cream)}
+.sticky-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--amberl)}
+.sticky-btn{
+  background:var(--amber);color:white;border:none;
+  font-family:'Cormorant Garamond',serif;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;
+  padding:12px 28px;border-radius:2px;cursor:pointer;transition:background .3s;
+}
+.sticky-btn:hover{background:var(--forest)}
+
+/* TRUST STRIP */
+.trust-strip{
+  background:var(--forest);padding:16px 60px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+}
+.trust-item{display:flex;align-items:center;gap:8px;color:rgba(245,239,224,0.7);font-family:'Cormorant Garamond',serif;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase}
+.trust-icon{color:var(--amberl)}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:80px 80px 40px}
+.f-top{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:56px;margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid rgba(245,239,224,0.06)}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--cream);margin-bottom:12px}
+.f-tagline{font-size:0.9rem;color:rgba(245,239,224,0.5);line-height:1.75}
+.fcol-t{font-family:'Cormorant Garamond',serif;font-size:0.7rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(245,239,224,0.85);margin-bottom:18px;font-weight:500}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{color:rgba(245,239,224,0.5);text-decoration:none;font-size:0.9rem;transition:color .3s}
+.flinks a:hover{color:var(--amberl)}
+.f-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.76rem;color:rgba(245,239,224,0.28);font-family:'Cormorant Garamond',serif;letter-spacing:0.06em;flex-wrap:wrap;gap:14px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:14px 24px!important}.nav-links,.nav-cta{display:none!important}
+  .pdp-hero{grid-template-columns:1fr}
+  .pdp-gallery{position:relative;height:60vw;min-height:300px;top:0}
+  .pdp-info{padding:32px 24px 100px}
+  .sticky-bar{padding:12px 24px}
+  .trust-strip{padding:16px 24px;gap:24px}
+  .f-top{grid-template-columns:1fr 1fr;gap:32px}
+  footer{padding:48px 24px 32px}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- Navigation -->
+<nav>
+  <a href="../index.html" class="nav-logo">Bighi Brothers</a>
+  <ul class="nav-center">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="category.html" class="active">Shop</a></li>
+    <li><a href="../journal/index.html">Journal</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cart">🛒<span class="cart-badge">2</span></button>
+    <a href="#" class="nav-cta">Start Ritual</a>
+  </div>
+</nav>
+
+<!-- Product Hero -->
+<section class="pdp-hero">
+  <div class="pdp-gallery">
+    <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&q=80" alt="Marigold Mountain Soap" class="pdp-main-img">
+    <span class="pdp-gallery-badge">Bestseller</span>
+    <div class="pdp-batch">
+      <div class="pdp-batch-num">Batch #47</div>
+      <div class="pdp-batch-date">Made: March 2026</div>
+    </div>
+  </div>
+
+  <div class="pdp-info">
+    <div class="pdp-breadcrumb">
+      <a href="#">Shop</a> / <a href="#">Cleanse</a> / <span>Marigold Mountain Soap</span>
+    </div>
+
+    <div class="pdp-eyebrow">Step 1 · Cleanse</div>
+    <h1 class="pdp-name">Marigold Mountain Soap</h1>
+    <p class="pdp-tagline">Our signature cold-processed soap. Gentle enough for daily use, effective enough to transform your skin over 30 days.</p>
+
+    <div class="pdp-rating">
+      <span class="pdp-stars">★★★★★</span>
+      <span class="pdp-review-count">124 reviews</span>
+    </div>
+
+    <div class="pdp-pricing">
+      <span class="pdp-price">₹50</span>
+      <span class="pdp-mrp">₹80</span>
+      <span class="pdp-save">Save 38%</span>
+    </div>
+
+    <div class="pdp-stock">
+      <span>23 bars</span> remaining in Batch #47
+    </div>
+
+    <!-- Ingredients -->
+    <div class="pdp-ingredients">
+      <div class="pdp-ing-label">Key Ingredients</div>
+      <div class="pdp-ing-chips">
+        <span class="pdp-ing-chip">Marigold Petals</span>
+        <span class="pdp-ing-chip">Organic Turmeric</span>
+        <span class="pdp-ing-chip">Cedar Essential Oil</span>
+        <span class="pdp-ing-chip">Coconut Oil</span>
+        <span class="pdp-ing-chip">Olive Oil</span>
+      </div>
+    </div>
+
+    <!-- Variants -->
+    <div class="pdp-variants">
+      <div class="pdp-var-label">Size</div>
+      <div class="pdp-var-options">
+        <button class="pdp-var-btn active">90g · ₹50</button>
+        <button class="pdp-var-btn">Mini 30g · ₹25</button>
+        <button class="pdp-var-btn">Family 250g · ₹120</button>
+      </div>
+    </div>
+
+    <!-- Quantity -->
+    <div class="pdp-quantity">
+      <div class="pdp-qty-label">Quantity</div>
+      <div class="pdp-qty-control">
+        <button class="pdp-qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="pdp-qty-value" id="qty">1</span>
+        <button class="pdp-qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="pdp-ctas">
+      <button class="btn-add-routine" onclick="addToRoutine()">
+        <span>Add to My Routine</span>
+      </button>
+      <button class="btn-add-cart" onclick="addToCart()">
+        <span>Add to Cart</span>
+      </button>
+    </div>
+
+    <!-- Refill Reminder -->
+    <div class="pdp-refill">
+      <p class="pdp-refill-text">Lasts ~30 days with daily use. We'll remind you before you run out.</p>
+      <label class="pdp-refill-check">
+        <input type="checkbox" checked>
+        <span class="pdp-refill-label">✓ Send refill reminder via WhatsApp</span>
+      </label>
+    </div>
+
+    <!-- Tabs -->
+    <div class="pdp-tabs">
+      <button class="pdp-tab active" data-tab="desc">Description</button>
+      <button class="pdp-tab" data-tab="how">How to Use</button>
+      <button class="pdp-tab" data-tab="ingredients">Full Ingredients</button>
+      <button class="pdp-tab" data-tab="reviews">Reviews</button>
+    </div>
+
+    <div class="pdp-tab-content active" id="desc">
+      <p>Each bar of Marigold Mountain Soap is cold-processed in small batches at our workshop. We use the traditional saponification method, which preserves the glycerin in the soap — your skin's natural moisturizer.</p>
+      <p>Marigold (Calendula) is renowned for its soothing properties. Combined with organic turmeric's anti-inflammatory benefits and cedar's grounding aroma, this soap is suitable for all skin types, especially sensitive or reactive skin.</p>
+      <h4>Benefits</h4>
+      <ul>
+        <li>Gentle daily cleansing without stripping natural oils</li>
+        <li>Soothes irritation and redness</li>
+        <li>Anti-inflammatory properties from turmeric</li>
+        <li>Natural antibacterial protection</li>
+        <li>Leaves skin soft, never tight</li>
+      </ul>
+    </div>
+
+    <div class="pdp-tab-content" id="how">
+      <p><strong>Morning Ritual:</strong> Lather between hands or on a washcloth. Apply to damp face and neck in gentle circular motions. Rinse thoroughly with lukewarm water. Follow with toner and moisturizer.</p>
+      <p><strong>Evening Ritual:</strong> Use as a second cleanse if wearing makeup or sunscreen. Can be used on body as well — particularly beneficial on arms and shoulders.</p>
+      <p><strong>Pro Tip:</strong> After rinsing, while skin is still damp, apply our Shea Moisture Cream to lock in moisture before it evaporates.</p>
+    </div>
+
+    <div class="pdp-tab-content" id="ingredients">
+      <p>Olea Europaea (Olive) Fruit Oil, Cocos Nucifera (Coconut) Oil, Aqua, Sodium Hydroxide, Ricinus Communis (Castor) Seed Oil, Marigold (Calendula Officinalis) Flower Extract, Curcuma Longa (Turmeric) Root Powder, Cedrus Deodara (Cedar) Wood Oil, Glycerin, Sodium Chloride.</p>
+      <p><strong>Full INCI list available on packaging.</strong></p>
+    </div>
+
+    <div class="pdp-tab-content" id="reviews">
+      <div class="review-item">
+        <div class="review-header">
+          <div>
+            <div class="review-author">Priya S.</div>
+            <div class="review-date">March 2026</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-text">"I've been using this for 6 weeks now. My skin feels so much softer and the random breakouts I used to get have almost completely stopped. The scent is heavenly — like walking through a forest after rain."</div>
+      </div>
+      <div class="review-item">
+        <div class="review-header">
+          <div>
+            <div class="review-author">Anita M.</div>
+            <div class="review-date">February 2026</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+        <div class="review-text">"Finally a soap that doesn't leave my skin feeling tight after washing. I'm on my third bar and my husband has stolen it too. The batch transparency is such a nice touch — love knowing exactly when it was made."</div>
+      </div>
+    </div>
+
+    <!-- Complete Your Routine -->
+    <div class="pdp-routine">
+      <div class="pdp-routine-title">Complete Your Routine</div>
+      <div class="pdp-routine-products">
+        <div class="pdp-routine-product completed">
+          <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=100&q=80" alt="Marigold Soap" class="pdp-rp-img">
+          <div class="pdp-rp-info">
+            <div class="pdp-rp-step">Step 1 · Cleanse</div>
+            <div class="pdp-rp-name">Marigold Mountain Soap</div>
+          </div>
+          <span class="pdp-rp-price">₹50</span>
+          <button class="pdp-rp-add">✓ In Routine</button>
+        </div>
+        <div class="pdp-routine-product">
+          <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=100&q=80" alt="Café Vanilla Scrub" class="pdp-rp-img">
+          <div class="pdp-rp-info">
+            <div class="pdp-rp-step">Step 2 · Treat</div>
+            <div class="pdp-rp-name">Café Vanilla Scrub</div>
+          </div>
+          <span class="pdp-rp-price">₹120</span>
+          <button class="pdp-rp-add">+ Add</button>
+        </div>
+        <div class="pdp-routine-product">
+          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=100&q=80" alt="Shea Cream" class="pdp-rp-img">
+          <div class="pdp-rp-info">
+            <div class="pdp-rp-step">Step 3 · Moisturize</div>
+            <div class="pdp-rp-name">Shea Moisture Cream</div>
+          </div>
+          <span class="pdp-rp-price">₹180</span>
+          <button class="pdp-rp-add">+ Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="trust-item"><span class="trust-icon">✓</span> Free Shipping 500+</div>
+  <div class="trust-item"><span class="trust-icon">🌿</span> 100% Natural</div>
+  <div class="trust-item"><span class="trust-icon">🐰</span> Cruelty Free</div>
+  <div class="trust-item"><span class="trust-icon">↩️</span> 30-Day Returns</div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="f-top">
+    <div>
+      <div class="f-logo">Bighi Brothers</div>
+      <p class="f-tagline">Handmade natural skincare. Every product crafted with intention.</p>
+    </div>
+    <div>
+      <h5 class="fcol-t">Shop</h5>
+      <ul class="flinks">
+        <li><a href="category.html">All Products</a></li>
+        <li><a href="#">Skin Care</a></li>
+        <li><a href="#">Gift Sets</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="fcol-t">Company</h5>
+      <ul class="flinks">
+        <li><a href="#">Our Story</a></li>
+        <li><a href="../journal/index.html">Journal</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="fcol-t">Connect</h5>
+      <ul class="flinks">
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 Bighi Brothers Industries Pvt. Ltd.</span>
+  </div>
+</footer>
+
+<!-- Sticky Bar -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-info">
+    <span class="sticky-name">Marigold Mountain Soap</span>
+    <span class="sticky-price">₹50</span>
+  </div>
+  <button class="sticky-btn" onclick="addToCart()">Add to Cart</button>
+</div>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('cur-ring');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  curRing.style.left = e.clientX + 'px';
+  curRing.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-link'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
+});
+
+// Quantity
+let qty = 1;
+function changeQty(delta) {
+  qty = Math.max(1, qty + delta);
+  document.getElementById('qty').textContent = qty;
+}
+
+// Add to cart
+function addToCart() {
+  const badge = document.querySelector('.cart-badge');
+  badge.textContent = parseInt(badge.textContent) + qty;
+  badge.classList.add('show');
+  document.querySelector('.btn-add-cart').textContent = '✓ Added to Cart';
+}
+
+// Add to routine
+function addToRoutine() {
+  document.querySelector('.btn-add-routine').innerHTML = '<span>✓ Added to Routine</span>';
+}
+
+// Tabs
+document.querySelectorAll('.pdp-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.pdp-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.pdp-tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Variant buttons
+document.querySelectorAll('.pdp-var-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pdp-var-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Sticky bar
+const stickyBar = document.getElementById('stickyBar');
+window.addEventListener('scroll', () => {
+  stickyBar.classList.toggle('show', window.scrollY > 500);
+});
+
+// Routine add buttons
+document.querySelectorAll('.pdp-rp-add').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (!btn.closest('.pdp-routine-product').classList.contains('completed')) {
+      btn.textContent = '✓ Added';
+      btn.style.background = 'var(--green)';
+      btn.style.borderColor = 'var(--green)';
+      btn.style.color = 'white';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

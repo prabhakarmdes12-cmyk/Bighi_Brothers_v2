@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bighi Brothers Journal — Updates, Stories & Rituals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5EFE0; --forest:#1C3A2E; --forest2:#162D24;
+  --amber:#C8831A; --amberl:#E8A830;
+  --offwhite:#FAF7F2; --charcoal:#2D2D2D; --warm:#8C8070;
+  --border:rgba(28,58,46,0.11);
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:auto}
+body{font-family:'EB Garamond',serif;background:var(--offwhite);color:var(--charcoal);overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:20px 60px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(250,247,242,0.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);transition:all 0.5s var(--ease);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--forest);text-decoration:none;font-weight:500}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{
+  font-family:'Cormorant Garamond',serif;font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(28,58,46,0.65);text-decoration:none;position:relative;transition:color .3s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--amber);
+  transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);
+}
+.nav-links a:hover,.nav-links a.active{color:var(--forest)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-cart,.nav-account{background:none;border:none;cursor:pointer;color:var(--forest);font-size:1rem;transition:color .3s}
+.nav-cart:hover,.nav-account:hover{color:var(--amber)}
+
+/* HERO */
+.journal-hero{
+  padding:160px 80px 80px;
+  background:var(--cream);
+  position:relative;overflow:hidden;
+}
+.journal-hero::before{
+  content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;
+  border-radius:50%;background:radial-gradient(circle,rgba(200,131,26,0.12) 0%,transparent 65%);
+}
+.journal-eyebrow{
+  font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:16px;display:flex;align-items:center;gap:12px;
+}
+.journal-eyebrow::before{content:'';width:28px;height:1px;background:var(--amber)}
+.journal-title{
+  font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4rem);color:var(--forest);
+  font-weight:700;line-height:1.1;margin-bottom:20px;max-width:700px;
+}
+.journal-subtitle{font-size:1.1rem;color:var(--warm);font-style:italic;max-width:550px;line-height:1.7}
+
+/* FILTER TABS */
+.filter-tabs{
+  display:flex;gap:0;padding:0 80px;background:var(--offwhite);
+  border-bottom:1px solid var(--border);position:sticky;top:70px;z-index:100;
+}
+.filter-tab{
+  background:none;border:none;border-bottom:2px solid transparent;
+  padding:16px 24px;font-family:'Cormorant Garamond',serif;font-size:0.82rem;
+  letter-spacing:0.12em;text-transform:uppercase;color:rgba(28,58,46,0.45);cursor:pointer;transition:all .3s;
+}
+.filter-tab:hover{color:var(--forest)}
+.filter-tab.active{color:var(--forest);border-bottom-color:var(--amber)}
+
+/* JOURNAL GRID */
+.journal-grid{
+  display:grid;grid-template-columns:1.5fr 1fr;gap:40px;
+  padding:60px 80px;max-width:1400px;margin:0 auto;
+}
+.journal-main{}
+.journal-sidebar{}
+
+/* FEATURED POST */
+.featured-post{
+  background:var(--forest);border-radius:3px;overflow:hidden;cursor:pointer;
+  transition:transform .4s var(--ease);
+}
+.featured-post:hover{transform:translateY(-4px)}
+.featured-post-img{width:100%;aspect-ratio:16/10;object-fit:cover;opacity:0.85}
+.featured-post-content{padding:32px}
+.featured-tag{
+  display:inline-block;background:var(--amber);color:white;
+  font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;
+  text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:14px;
+}
+.featured-title{
+  font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--cream);
+  font-weight:700;line-height:1.2;margin-bottom:12px;
+}
+.featured-excerpt{font-size:0.95rem;color:rgba(245,239,224,0.7);line-height:1.7;margin-bottom:16px}
+.featured-meta{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;color:rgba(245,239,224,0.4)}
+
+/* REGULAR POSTS */
+.posts-list{display:flex;flex-direction:column;gap:24px;margin-top:40px}
+.post-card{
+  display:grid;grid-template-columns:140px 1fr;gap:20px;
+  padding:20px 0;border-bottom:1px solid var(--border);cursor:pointer;
+  transition:all .3s;
+}
+.post-card:hover{background:rgba(28,58,46,0.02)}
+.post-thumb{width:140px;height:100px;object-fit:cover;border-radius:2px}
+.post-content{}
+.post-tag{
+  font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:6px;
+}
+.post-title{
+  font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--forest);
+  font-weight:600;line-height:1.3;margin-bottom:6px;transition:color .3s;
+}
+.post-card:hover .post-title{color:var(--amber)}
+.post-date{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--warm)}
+
+/* SIDEBAR */
+.sidebar-section{margin-bottom:40px}
+.sidebar-title{
+  font-family:'Cormorant Garamond',serif;font-size:0.78rem;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--forest);margin-bottom:16px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.categories{list-style:none}
+.categories li{
+  padding:10px 0;border-bottom:1px solid rgba(28,58,46,0.06);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.categories a{
+  font-size:0.9rem;color:var(--charcoal);text-decoration:none;transition:color .3s;
+}
+.categories a:hover{color:var(--amber)}
+.cat-count{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--warm)}
+
+/* NEWSLETTER CTA */
+.newsletter-cta{
+  background:var(--forest);padding:32px;border-radius:3px;text-align:center;
+}
+.newsletter-cta h3{
+  font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--cream);
+  font-style:italic;margin-bottom:10px;
+}
+.newsletter-cta p{font-size:0.85rem;color:rgba(245,239,224,0.6);margin-bottom:20px}
+.newsletter-form{display:flex;gap:8px}
+.newsletter-input{
+  flex:1;background:rgba(245,239,224,0.1);border:1px solid rgba(245,239,224,0.2);
+  padding:10px 14px;font-family:'EB Garamond',serif;font-size:0.9rem;color:var(--cream);
+  border-radius:2px;outline:none;
+}
+.newsletter-input::placeholder{color:rgba(245,239,224,0.4)}
+.newsletter-btn{
+  background:var(--amber);border:none;color:white;
+  padding:10px 20px;font-family:'Cormorant Garamond',serif;font-size:0.78rem;
+  letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background .3s;
+}
+.newsletter-btn:hover{background:var(--amberl)}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:80px 80px 40px}
+.f-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;
+  gap:56px;margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid rgba(245,239,224,0.06);
+}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--cream);margin-bottom:12px}
+.f-tagline{font-size:0.9rem;color:rgba(245,239,224,0.5);line-height:1.75}
+.fcol-t{font-family:'Cormorant Garamond',serif;font-size:0.7rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(245,239,224,0.85);margin-bottom:18px;font-weight:500}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{color:rgba(245,239,224,0.5);text-decoration:none;font-size:0.9rem;transition:color .3s}
+.flinks a:hover{color:var(--amberl)}
+.f-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.76rem;color:rgba(245,239,224,0.28);font-family:'Cormorant Garamond',serif;
+  letter-spacing:0.06em;flex-wrap:wrap;gap:14px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  .journal-hero{padding:120px 24px 60px}
+  .journal-grid{grid-template-columns:1fr;padding:40px 24px}
+  .filter-tabs{padding:0 24px;overflow-x:auto}
+  .post-card{grid-template-columns:100px 1fr;gap:14px}
+  .post-thumb{width:100px;height:75px}
+  .f-top{grid-template-columns:1fr 1fr;gap:32px}
+  footer{padding:48px 24px 32px}
+}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="../index.html" class="nav-logo">Bighi Brothers</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../shop/category.html">Shop</a></li>
+    <li><a href="index.html" class="active">Journal</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-account">👤</button>
+    <button class="nav-cart">🛒</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="journal-hero">
+  <div class="journal-eyebrow">The Bighi Brothers Journal</div>
+  <h1 class="journal-title">Stories, Updates & The Art of Daily Rituals</h1>
+  <p class="journal-subtitle">Behind-the-scenes from our workshop, skincare wisdom, ingredient spotlights, and everything in between.</p>
+</section>
+
+<!-- Filter Tabs -->
+<div class="filter-tabs">
+  <button class="filter-tab active">All</button>
+  <button class="filter-tab">Updates</button>
+  <button class="filter-tab">Ingredients</button>
+  <button class="filter-tab">Rituals</button>
+  <button class="filter-tab">Behind the Scenes</button>
+  <button class="filter-tab">Changelog</button>
+</div>
+
+<!-- Main Content -->
+<div class="journal-grid">
+  <main class="journal-main">
+    <!-- Featured Post -->
+    <article class="featured-post rv">
+      <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80" alt="Handmade soap process" class="featured-post-img">
+      <div class="featured-post-content">
+        <span class="featured-tag">Behind the Scenes</span>
+        <h2 class="featured-title">How We Make Each Batch: A Journey from Ingredients to Your Hands</h2>
+        <p class="featured-excerpt">Every bar of our Marigold Mountain Soap begins its life 21 days before it reaches you. Here's the complete story of small-batch, handmade skincare — from sourcing ingredients to the final cure.</p>
+        <div class="featured-meta">March 15, 2026 · 8 min read</div>
+      </div>
+    </article>
+
+    <!-- Posts List -->
+    <div class="posts-list">
+      <article class="post-card rv">
+        <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=300&q=80" alt="Turmeric" class="post-thumb">
+        <div class="post-content">
+          <span class="post-tag">Ingredients</span>
+          <h3 class="post-title">The Golden Wonder: Why Turmeric is the Heart of Indian Skincare</h3>
+          <div class="post-date">March 10, 2026</div>
+        </div>
+      </article>
+
+      <article class="post-card rv">
+        <img src="https://images.unsplash.com/photo-1570194065650-d99fb4b38b15?w=300&q=80" alt="Morning routine" class="post-thumb">
+        <div class="post-content">
+          <span class="post-tag">Rituals</span>
+          <h3 class="post-title">Building Your Evening Ritual: A 5-Step Guide for Glowing Skin</h3>
+          <div class="post-date">March 5, 2026</div>
+        </div>
+      </article>
+
+      <article class="post-card rv">
+        <div class="post-content">
+          <span class="post-tag">Changelog</span>
+          <h3 class="post-title">New: Subscription Plans — Save 10% on Your Monthly Ritual</h3>
+          <div class="post-date">March 1, 2026</div>
+        </div>
+      </article>
+
+      <article class="post-card rv">
+        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300&q=80" alt="Workshop" class="post-thumb">
+        <div class="post-content">
+          <span class="post-tag">Behind the Scenes</span>
+          <h3 class="post-title">Meet the Makers: The Women Behind Bighi Brothers' Handcrafted Products</h3>
+          <div class="post-date">February 25, 2026</div>
+        </div>
+      </article>
+
+      <article class="post-card rv">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=300&q=80" alt="Natural ingredients" class="post-thumb">
+        <div class="post-content">
+          <span class="post-tag">Ingredients</span>
+          <h3 class="post-title">Shea Butter vs. Cocoa Butter: Which is Right for Your Skin?</h3>
+          <div class="post-date">February 18, 2026</div>
+        </div>
+      </article>
+
+      <article class="post-card rv">
+        <div class="post-content">
+          <span class="post-tag">Updates</span>
+          <h3 class="post-title">We've Gone WhatsApp-First: Your Skincare Journey Now Includes Direct Support</h3>
+          <div class="post-date">February 10, 2026</div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Sidebar -->
+  <aside class="journal-sidebar">
+    <!-- Categories -->
+    <div class="sidebar-section">
+      <h4 class="sidebar-title">Categories</h4>
+      <ul class="categories">
+        <li><a href="#">Updates</a><span class="cat-count">8</span></li>
+        <li><a href="#">Ingredients</a><span class="cat-count">12</span></li>
+        <li><a href="#">Rituals</a><span class="cat-count">15</span></li>
+        <li><a href="#">Behind the Scenes</a><span class="cat-count">6</span></li>
+        <li><a href="#">Changelog</a><span class="cat-count">4</span></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="sidebar-section">
+      <div class="newsletter-cta">
+        <h3>Join the Ritual</h3>
+        <p>Weekly tips, new product announcements, and stories from our workshop.</p>
+        <form class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Your phone number">
+          <button type="submit" class="newsletter-btn">Join</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Recent Updates -->
+    <div class="sidebar-section">
+      <h4 class="sidebar-title">Recent Updates</h4>
+      <ul class="categories">
+        <li><a href="#">Added: Shea Moisture Cream to routine builder</a><span class="cat-count">2d</span></li>
+        <li><a href="#">New: Batch #48 now available</a><span class="cat-count">5d</span></li>
+        <li><a href="#">Fixed: Checkout flow on mobile</a><span class="cat-count">1w</span></li>
+        <li><a href="#">Updated: Shipping policy</a><span class="cat-count">2w</span></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="f-top">
+    <div>
+      <div class="f-logo">Bighi Brothers</div>
+      <p class="f-tagline">Handmade natural skincare. Every product crafted with intention. Every batch made with care.</p>
+    </div>
+    <div>
+      <h5 class="fcol-t">Shop</h5>
+      <ul class="flinks">
+        <li><a href="../shop/category.html">All Products</a></li>
+        <li><a href="#">Skin Care</a></li>
+        <li><a href="#">Hair Care</a></li>
+        <li><a href="#">Gift Sets</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="fcol-t">Company</h5>
+      <ul class="flinks">
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="fcol-t">Connect</h5>
+      <ul class="flinks">
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 Bighi Brothers Industries Pvt. Ltd.</span>
+    <span>Made with intention in India</span>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+// Filter tabs
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

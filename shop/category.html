@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Bighi Brothers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5EFE0; --forest:#1C3A2E; --forest2:#162D24;
+  --amber:#C8831A; --amberl:#E8A830;
+  --offwhite:#FAF7F2; --charcoal:#2D2D2D; --warm:#8C8070;
+  --border:rgba(28,58,46,0.11);
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:auto}
+body{font-family:'EB Garamond',serif;background:var(--forest2);color:var(--charcoal);overflow-x:hidden;cursor:none}
+
+/* Custom Cursor */
+#cur{position:fixed;width:10px;height:10px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9996;transform:translate(-50%,-50%);transition:width .4s var(--ease),height .4s var(--ease)}
+#cur-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(200,131,26,0.5);border-radius:50%;pointer-events:none;z-index:9995;transform:translate(-50%,-50%);transition:width .5s var(--ease),height .5s var(--ease)}
+body.cursor-link #cur{width:14px;height:14px;background:var(--forest)}
+body.cursor-product #cur{width:56px;height:56px;background:rgba(200,131,26,0.15);border:1px solid var(--amber)}
+body.cursor-product #cur-ring{opacity:0}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:18px 64px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(22,45,36,0.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(245,239,224,0.07);transition:all .4s var(--ease);
+}
+nav.solid{background:rgba(250,247,242,0.97);border-bottom:1px solid rgba(28,58,46,0.1)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--cream);text-decoration:none;font-weight:500}
+nav.solid .nav-logo{color:var(--forest)}
+.nav-center{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-center a{
+  font-family:'Cormorant Garamond',serif;font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(245,239,224,0.7);text-decoration:none;position:relative;transition:color .3s;
+}
+nav.solid .nav-center a{color:rgba(28,58,46,0.65)}
+.nav-center a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--amber);
+  transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);
+}
+.nav-center a:hover,.nav-center a.active{color:var(--amberl)}
+nav.solid .nav-center a:hover,nav.solid .nav-center a.active{color:var(--forest)}
+.nav-center a:hover::after,.nav-center a.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-cart{position:relative;background:none;border:none;cursor:pointer;color:rgba(245,239,224,0.8);font-size:1.1rem;padding:6px;transition:color .3s}
+nav.solid .nav-cart{color:var(--forest)}
+.nav-cart:hover{color:var(--amberl)}
+.cart-badge{
+  position:absolute;top:0;right:0;width:16px;height:16px;background:var(--amber);border-radius:50%;
+  font-family:'DM Mono',monospace;font-size:0.55rem;color:white;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:all .3s var(--ease);
+}
+.cart-badge.show{opacity:1;transform:scale(1)}
+.nav-cta{background:var(--amber);color:white;font-family:'Cormorant Garamond',serif;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;padding:9px 20px;border-radius:1px;text-decoration:none;transition:background .3s;white-space:nowrap}
+.nav-cta:hover{background:var(--forest)}
+
+/* CATEGORY HEADER */
+.cat-header{
+  padding:140px 64px 60px;background:var(--forest2);position:relative;overflow:hidden;
+}
+.cat-header::before{
+  content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;
+  border-radius:50%;background:radial-gradient(circle,rgba(200,131,26,0.12) 0%,transparent 65%);
+}
+.cat-eyebrow{
+  font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--amberl);margin-bottom:12px;
+}
+.cat-title{
+  font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,3.8rem);
+  font-style:italic;color:var(--cream);line-height:1.15;margin-bottom:16px;
+}
+.cat-desc{font-size:1rem;color:rgba(245,239,224,0.65);max-width:520px;line-height:1.7}
+.cat-stats{display:flex;gap:32px;margin-top:28px}
+.cat-stat{text-align:left}
+.cat-stat-num{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--amberl);font-weight:700}
+.cat-stat-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,239,224,0.4)}
+
+/* FILTER BAR */
+.filter-wrap{
+  position:sticky;top:70px;z-index:100;
+  background:var(--offwhite);border-bottom:1px solid rgba(28,58,46,0.1);
+}
+.filters{display:flex;align-items:center;gap:0;padding:0 64px;overflow-x:auto}
+.filter-tab{
+  background:none;border:none;border-bottom:2px solid transparent;
+  padding:14px 20px;font-family:'Cormorant Garamond',serif;font-size:0.82rem;
+  letter-spacing:0.12em;text-transform:uppercase;color:rgba(28,58,46,0.45);cursor:pointer;transition:all .3s;white-space:nowrap;
+}
+.filter-tab:hover{color:var(--forest)}
+.filter-tab.active{color:var(--forest);border-bottom-color:var(--amber)}
+.filter-count{
+  display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;
+  background:var(--amber);color:white;font-family:'DM Mono',monospace;font-size:0.55rem;margin-left:4px;
+}
+.sort-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 64px;border-bottom:1px solid rgba(28,58,46,0.07);background:var(--offwhite);
+}
+.sort-label{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(28,58,46,0.4)}
+.sort-select{
+  font-family:'Cormorant Garamond',serif;font-size:0.85rem;border:1px solid rgba(28,58,46,0.15);
+  background:transparent;padding:4px 8px;color:var(--forest);cursor:pointer;outline:none;
+}
+.view-toggle{display:flex;gap:8px}
+.view-btn{background:none;border:1px solid rgba(28,58,46,0.15);padding:6px 10px;cursor:pointer;color:var(--warm);transition:all .3s}
+.view-btn.active,.view-btn:hover{background:var(--forest);color:var(--cream);border-color:var(--forest)}
+
+/* PRODUCT GRID */
+.grid-wrap{padding:48px 64px 100px;background:var(--offwhite)}
+.product-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+}
+.product-card{
+  background:var(--forest2);border:1px solid rgba(245,239,224,0.07);border-radius:2px;
+  overflow:hidden;cursor:pointer;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+  display:flex;flex-direction:column;
+}
+.product-card:hover{transform:translateY(-4px);border-color:rgba(200,131,26,0.4);box-shadow:0 16px 40px rgba(0,0,0,0.3)}
+.product-card.featured{grid-column:span 2}
+.product-visual{position:relative;overflow:hidden;aspect-ratio:4/5}
+.product-card.featured .product-visual{aspect-ratio:16/10}
+.product-img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.product-card:hover .product-img{transform:scale(1.04)}
+.product-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(22,45,36,0.8) 100%);
+}
+.product-badge{
+  position:absolute;top:12px;left:12px;
+  font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;
+  text-transform:uppercase;padding:4px 10px;border-radius:100px;background:var(--amber);color:white;
+}
+.product-badge.new{background:var(--forest)}
+.product-badge.ltd{background:#8B1A1A}
+.product-badge.bestseller{background:var(--amberl)}
+.product-quick-add{
+  position:absolute;bottom:12px;left:12px;right:12px;
+  background:var(--amber);color:white;border:none;
+  font-family:'Cormorant Garamond',serif;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:10px 16px;border-radius:2px;cursor:pointer;transition:background .3s;
+  opacity:0;transform:translateY(8px);transition:all .3s;
+}
+.product-card:hover .product-quick-add{opacity:1;transform:translateY(0)}
+.product-quick-add:hover{background:var(--forest)}
+.product-content{padding:16px;flex:1;display:flex;flex-direction:column;gap:6px}
+.product-step{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--amberl)}
+.product-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--cream);line-height:1.3}
+.product-card.featured .product-name{font-size:1.5rem}
+.product-tagline{font-size:0.8rem;color:rgba(245,239,224,0.5);line-height:1.5;flex:1}
+.product-ingredients{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.ingredient-chip{
+  font-family:'DM Mono',monospace;font-size:0.52rem;letter-spacing:0.06em;
+  background:rgba(200,131,26,0.15);border:1px solid rgba(200,131,26,0.25);
+  color:rgba(245,239,224,0.7);padding:2px 8px;border-radius:100px;
+}
+.product-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,239,224,0.07)}
+.product-price{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--amberl);font-weight:500}
+.product-mrp{font-size:0.78rem;color:rgba(245,239,224,0.35);text-decoration:line-through;margin-left:6px}
+.product-rating{font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(245,239,224,0.4);display:flex;align-items:center;gap:4px}
+.product-rating::before{content:'★';color:var(--amber)}
+
+/* ROUTINE BUILDER SECTION */
+.routine-prompt{
+  background:var(--cream);padding:80px 64px;text-align:center;
+}
+.routine-prompt h2{
+  font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--forest);
+  font-weight:700;margin-bottom:12px;
+}
+.routine-prompt h2 em{font-style:italic;color:var(--amber)}
+.routine-prompt p{font-size:1rem;color:var(--warm);font-style:italic;max-width:500px;margin:0 auto 32px}
+.routine-steps{display:flex;justify-content:center;gap:32px;margin-bottom:32px;flex-wrap:wrap}
+.routine-step-card{
+  background:white;border:1px solid var(--border);border-radius:3px;padding:24px 32px;
+  min-width:180px;transition:all .3s;cursor:pointer;
+}
+.routine-step-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(28,58,46,0.1);border-color:var(--amber)}
+.routine-step-num{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.routine-step-icon{font-size:2rem;margin-bottom:8px}
+.routine-step-name{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--forest);font-weight:600}
+.btn-routine{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--forest);color:var(--cream);
+  font-family:'Cormorant Garamond',serif;font-size:0.82rem;letter-spacing:0.16em;text-transform:uppercase;
+  padding:14px 32px;border:none;border-radius:2px;cursor:pointer;text-decoration:none;
+  transition:background .3s;
+}
+.btn-routine:hover{background:var(--amber)}
+
+/* TRUST STRIP */
+.trust-strip{
+  background:var(--forest);padding:16px 60px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+}
+.trust-item{display:flex;align-items:center;gap:8px;color:rgba(245,239,224,0.7);font-family:'Cormorant Garamond',serif;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase}
+.trust-icon{color:var(--amberl);font-size:0.9rem}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:80px 80px 40px}
+.f-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;
+  gap:56px;margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid rgba(245,239,224,0.06);
+}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--cream);margin-bottom:12px}
+.f-tagline{font-size:0.9rem;color:rgba(245,239,224,0.5);line-height:1.75}
+.fcol-t{font-family:'Cormorant Garamond',serif;font-size:0.7rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(245,239,224,0.85);margin-bottom:18px;font-weight:500}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{color:rgba(245,239,224,0.5);text-decoration:none;font-size:0.9rem;transition:color .3s}
+.flinks a:hover{color:var(--amberl)}
+.f-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.76rem;color:rgba(245,239,224,0.28);font-family:'Cormorant Garamond',serif;
+  letter-spacing:0.06em;flex-wrap:wrap;gap:14px;
+}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){
+  nav{padding:14px 24px!important}.nav-links,.nav-cta{display:none!important}
+  .cat-header{padding:100px 24px 40px}
+  .filters,.sort-bar{padding:0 24px}
+  .grid-wrap{padding:32px 24px 80px}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .product-card.featured{grid-column:span 1}
+  .routine-prompt{padding:60px 24px}
+  .routine-steps{gap:16px}
+  .trust-strip{padding:16px 24px;gap:24px}
+  .f-top{grid-template-columns:1fr 1fr;gap:32px}
+  footer{padding:48px 24px 32px}
+}
+@media(max-width:560px){.product-grid{grid-template-columns:1fr}}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+
+/* CART DRAWER */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  max-width: 100%;
+  height: 100vh;
+  background: var(--cream);
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+}
+.cart-drawer.open {
+  transform: translateX(0);
+}
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+.cart-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.cart-drawer-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-drawer-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--forest);
+}
+.cart-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--forest);
+  padding: 4px 8px;
+}
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+.cart-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--warm);
+}
+.cart-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-item-img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 2px;
+  background: var(--offwhite);
+}
+.cart-item-info {
+  flex: 1;
+}
+.cart-item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  color: var(--forest);
+  margin-bottom: 4px;
+}
+.cart-item-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+.cart-item-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cart-item-qty button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  background: none;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.9rem;
+}
+.cart-item-remove {
+  color: var(--warm);
+  font-size: 0.7rem;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.cart-drawer-footer {
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  background: var(--offwhite);
+}
+.cart-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+.cart-subtotal span:last-child {
+  font-weight: 500;
+  color: var(--forest);
+}
+.cart-note {
+  font-size: 0.75rem;
+  color: var(--warm);
+  margin-bottom: 16px;
+}
+.btn-cart-checkout {
+  width: 100%;
+  background: var(--amber);
+  color: white;
+  border: none;
+  padding: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.btn-cart-continue {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--warm);
+}
+@media (max-width: 480px) {
+  .cart-drawer { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- Navigation -->
+<nav>
+  <a href="../index.html" class="nav-logo">Bighi Brothers</a>
+  <ul class="nav-center">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="category.html" class="active">Shop</a></li>
+    <li><a href="../journal/index.html">Journal</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../shop/account.html">Account</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cart" onclick="openCart()">🛒<span class="cart-badge" id="cart-badge">0</span></button>
+    <a href="#" class="nav-cta">Start Ritual</a>
+  </div>
+</nav>
+
+<!-- Category Header -->
+<section class="cat-header">
+  <div class="cat-eyebrow">The Collection · 2026</div>
+  <h1 class="cat-title">Daily Rituals</h1>
+  <p class="cat-desc">Every product is a step in your daily practice. Build your personalized skincare routine with our handcrafted, natural ingredients.</p>
+  <div class="cat-stats">
+    <div class="cat-stat">
+      <div class="cat-stat-num">12</div>
+      <div class="cat-stat-label">Products</div>
+    </div>
+    <div class="cat-stat">
+      <div class="cat-stat-num">4</div>
+      <div class="cat-stat-label">Categories</div>
+    </div>
+    <div class="cat-stat">
+      <div class="cat-stat-num">100%</div>
+      <div class="cat-stat-label">Natural</div>
+    </div>
+  </div>
+</section>
+
+<!-- Filter Bar -->
+<div class="filter-wrap">
+  <div class="filters">
+    <button class="filter-tab active">All Products</button>
+    <button class="filter-tab">Cleanse <span class="filter-count">4</span></button>
+    <button class="filter-tab">Treat <span class="filter-count">3</span></button>
+    <button class="filter-tab">Moisturize <span class="filter-count">3</span></button>
+    <button class="filter-tab">Protect <span class="filter-count">2</span></button>
+  </div>
+  <div class="sort-bar">
+    <div>
+      <span class="sort-label">Sort by:</span>
+      <select class="sort-select">
+        <option>Featured</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest</option>
+        <option>Best Selling</option>
+      </select>
+    </div>
+    <div class="view-toggle">
+      <button class="view-btn active">▦</button>
+      <button class="view-btn">▤</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product Grid -->
+<div class="grid-wrap">
+  <div class="product-grid">
+    <!-- Featured Product -->
+    <article class="product-card featured rv">
+      <div class="product-visual">
+        <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=600&q=80" alt="Marigold Mountain Soap" class="product-img">
+        <div class="product-overlay"></div>
+        <span class="product-badge bestseller">Bestseller</span>
+        <button class="product-quick-add" onclick="event.preventDefault();quickAdd('marigold-mountain-soap', 'Marigold Mountain Soap', 50)">Add to Routine</button>
+      </div>
+      <div class="product-content">
+        <div class="product-step">Step 1 · Cleanse</div>
+        <h3 class="product-name">Marigold Mountain Soap</h3>
+        <p class="product-tagline">Our signature cold-processed soap with marigold petals, turmeric, and cedar essential oil. Gentle enough for daily use.</p>
+        <div class="product-ingredients">
+          <span class="ingredient-chip">Marigold</span>
+          <span class="ingredient-chip">Turmeric</span>
+          <span class="ingredient-chip">Cedar</span>
+        </div>
+        <div class="product-foot">
+          <div>
+            <span class="product-price">₹50</span>
+            <span class="product-mrp">₹80</span>
+          </div>
+          <span class="product-rating">4.8 (124)</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Regular Products -->
+    <article class="product-card rv">
+      <div class="product-visual">
+        <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400&q=80" alt="Café Vanilla Scrub" class="product-img">
+        <div class="product-overlay"></div>
+        <span class="product-badge new">New</span>
+        <button class="product-quick-add" onclick="event.preventDefault();quickAdd('cafe-vanilla-scrub', 'Café Vanilla Scrub', 120)">Add to Routine</button>
+      </div>
+      <div class="product-content">
+        <div class="product-step">Step 2 · Treat</div>
+        <h3 class="product-name">Café Vanilla Scrub</h3>
+        <p class="product-tagline">Exfoliating coffee grounds with vanilla absolute and kokum butter.</p>
+        <div class="product-foot">
+          <span class="product-price">₹120</span>
+          <span class="product-rating">4.9 (89)</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card rv">
+      <div class="product-visual">
+        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&q=80" alt="Shea Moisture Cream" class="product-img">
+        <div class="product-overlay"></div>
+        <button class="product-quick-add" onclick="event.preventDefault();quickAdd('shea-moisture-cream', 'Shea Moisture Cream', 180)">Add to Routine</button>
+      </div>
+      <div class="product-content">
+        <div class="product-step">Step 3 · Moisturize</div>
+        <h3 class="product-name">Shea Moisture Cream</h3>
+        <p class="product-tagline">Rich shea butter and calendula blend for deep nourishment.</p>
+        <div class="product-foot">
+          <span class="product-price">₹180</span>
+          <span class="product-rating">4.7 (56)</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card rv">
+      <div class="product-visual">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80" alt="Lip Balm" class="product-img">
+        <div class="product-overlay"></div>
+        <button class="product-quick-add" onclick="event.preventDefault();quickAdd('peach-lip-balm', 'Peach Lip Balm', 60)">Add to Routine</button>
+      </div>
+      <div class="product-content">
+        <div class="product-step">Step 4 · Protect</div>
+        <h3 class="product-name">Peach Lip Balm</h3>
+        <p class="product-tagline">Cocoa butter and peach kernel oil for soft, protected lips.</p>
+        <div class="product-foot">
+          <span class="product-price">₹60</span>
+          <span class="product-rating">4.9 (203)</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card rv">
+      <div class="product-visual">
+        <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&q=80" alt="Neem Face Wash" class="product-img">
+        <div class="product-overlay"></div>
+        <button class="product-quick-add" onclick="event.preventDefault();quickAdd('neem-purifier', 'Neem Purifier', 90)">Add to Routine</button>
+      </div>
+      <div class="product-content">
+        <div class="product-step">Step 1 · Cleanse</div>
+        <h3 class="product-name">Neem Purifier</h3>
+        <p class="product-tagline">Neem and tea tree for acne-prone and oily skin types.</p>
+        <div class="product-foot">
+          <span class="product-price">₹90</span>
+          <span class="product-rating">4.6 (78)</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card rv">
+      <div class="product-visual">
+        <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&q=80" alt="Hair Oil" class="product-img">
+        <div class="product-overlay"></div>
+        <span class="product-badge ltd">Limited</span>
+        <button class="product-quick-add" onclick="event.preventDefault();quickAdd('bhringraj-hair-oil', 'Bhringraj Hair Oil', 150)">Add to Routine</button>
+      </div>
+      <div class="product-content">
+        <div class="product-step">Hair Care</div>
+        <h3 class="product-name">Bhringraj Hair Oil</h3>
+        <p class="product-tagline">Traditional bhringraj and amla blend for scalp health.</p>
+        <div class="product-foot">
+          <span class="product-price">₹150</span>
+          <span class="product-rating">4.8 (92)</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<!-- Routine Builder Prompt -->
+<section class="routine-prompt">
+  <h2>Not Sure Where to Start? <em>Build Your Ritual</em></h2>
+  <p>Take our 2-minute skin quiz and get a personalized routine recommendation.</p>
+  <div class="routine-steps">
+    <div class="routine-step-card">
+      <div class="routine-step-num">Step 1</div>
+      <div class="routine-step-icon">🧼</div>
+      <div class="routine-step-name">Cleanse</div>
+    </div>
+    <div class="routine-step-card">
+      <div class="routine-step-num">Step 2</div>
+      <div class="routine-step-icon">✨</div>
+      <div class="routine-step-name">Treat</div>
+    </div>
+    <div class="routine-step-card">
+      <div class="routine-step-num">Step 3</div>
+      <div class="routine-step-icon">💧</div>
+      <div class="routine-step-name">Moisturize</div>
+    </div>
+  </div>
+  <button class="btn-routine">Build My Routine →</button>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CART DRAWER
+     ═══════════════════════════════════════════════ -->
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-drawer-header">
+    <h3>Your Ritual</h3>
+    <button onclick="closeCart()" class="cart-close" aria-label="Close cart">×</button>
+  </div>
+  <div id="cart-items" class="cart-items">
+    <!-- Items injected by JavaScript -->
+  </div>
+  <div class="cart-drawer-footer">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span id="cart-total">₹0</span>
+    </div>
+    <p class="cart-note">Shipping calculated at checkout</p>
+    <button class="btn-cart-checkout" onclick="window.location.href='checkout.html'">
+      Checkout →
+    </button>
+    <button class="btn-cart-continue" onclick="closeCart()">
+      Continue Shopping
+    </button>
+  </div>
+</div>
+
+<!-- Cart Overlay -->
+<div id="cart-overlay" class="cart-overlay" onclick="closeCart()"></div>
+
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="trust-item"><span class="trust-icon">✓</span> Free Shipping 500+</div>
+  <div class="trust-item"><span class="trust-icon">🌿</span> 100% Natural</div>
+  <div class="trust-item"><span class="trust-icon">🐰</span> Cruelty Free</div>
+  <div class="trust-item"><span class="trust-icon">🇮🇳</span> Made in India</div>
+  <div class="trust-item"><span class="trust-icon">↩️</span> 30-Day Returns</div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="f-top">
+    <div>
+      <div class="f-logo">Bighi Brothers</div>
+      <p class="f-tagline">Handmade natural skincare. Every product crafted with intention.</p>
+    </div>
+    <div>
+      <h5 class="fcol-t">Shop</h5>
+      <ul class="flinks">
+        <li><a href="#">All Products</a></li>
+        <li><a href="#">Skin Care</a></li>
+        <li><a href="#">Hair Care</a></li>
+        <li><a href="#">Gift Sets</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="fcol-t">Company</h5>
+      <ul class="flinks">
+        <li><a href="#">Our Story</a></li>
+        <li><a href="../journal/index.html">Journal</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="fcol-t">Connect</h5>
+      <ul class="flinks">
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 Bighi Brothers Industries Pvt. Ltd.</span>
+    <span>Made with intention in India</span>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('cur-ring');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  curRing.style.left = e.clientX + 'px';
+  curRing.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .product-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    if (el.classList.contains('product-card')) document.body.classList.add('cursor-product');
+    else document.body.classList.add('cursor-link');
+  });
+  el.addEventListener('mouseleave', () => {
+    document.body.classList.remove('cursor-product', 'cursor-link');
+  });
+});
+
+// Nav solid on scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').classList.toggle('solid', window.scrollY > 50);
+});
+
+// Filter tabs
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+// Quick add functionality
+document.querySelectorAll('.product-quick-add').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const badge = document.querySelector('.cart-badge');
+    badge.textContent = parseInt(badge.textContent) + 1;
+    badge.classList.add('show');
+    btn.textContent = 'Added ✓';
+    btn.style.background = 'var(--forest)';
+    setTimeout(() => {
+      btn.textContent = 'Add to Routine';
+      btn.style.background = '';
+    }, 1500);
+  });
+});
+
+// ═══════════════════════════════════════════════════
+// CART SYSTEM v1.0
+// ═══════════════════════════════════════════════════
+
+const Cart = {
+  items: [],
+  
+  init() {
+    const saved = localStorage.getItem('bighi_cart');
+    if (saved) {
+      try {
+        this.items = JSON.parse(saved);
+      } catch(e) {
+        this.items = [];
+      }
+    }
+    this.updateUI();
+  },
+  
+  add(product) {
+    const existing = this.items.find(i => i.id === product.id);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      this.items.push({...product, qty: 1});
+    }
+    this.save();
+    this.updateUI();
+  },
+  
+  remove(id) {
+    this.items = this.items.filter(i => i.id !== id);
+    this.save();
+    this.updateUI();
+  },
+  
+  updateQty(id, qty) {
+    const item = this.items.find(i => i.id === id);
+    if (item) {
+      if (qty <= 0) {
+        this.remove(id);
+      } else {
+        item.qty = qty;
+        this.save();
+        this.updateUI();
+      }
+    }
+  },
+  
+  getTotal() {
+    return this.items.reduce((sum, i) => sum + (i.price * i.qty), 0);
+  },
+  
+  getCount() {
+    return this.items.reduce((sum, i) => sum + i.qty, 0);
+  },
+  
+  save() {
+    localStorage.setItem('bighi_cart', JSON.stringify(this.items));
+  },
+  
+  updateUI() {
+    const badge = document.getElementById('cart-badge');
+    if (badge) {
+      const count = this.getCount();
+      badge.textContent = count;
+      if (count > 0) {
+        badge.style.opacity = '1';
+        badge.style.transform = 'scale(1)';
+      } else {
+        badge.style.opacity = '0';
+        badge.style.transform = 'scale(0)';
+      }
+    }
+    this.renderDrawer();
+  },
+  
+  renderDrawer() {
+    const itemsContainer = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
+    
+    if (!itemsContainer) return;
+    
+    if (this.items.length === 0) {
+      itemsContainer.innerHTML = '<div class="cart-empty">Your ritual bag is empty</div>';
+    } else {
+      itemsContainer.innerHTML = this.items.map(item => `
+        <div class="cart-item">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">₹${item.price}</div>
+            <div class="cart-item-qty">
+              <button onclick="Cart.updateQty('${item.id}', ${item.qty - 1})">−</button>
+              <span>${item.qty}</span>
+              <button onclick="Cart.updateQty('${item.id}', ${item.qty + 1})">+</button>
+            </div>
+          </div>
+          <button class="cart-item-remove" onclick="Cart.remove('${item.id}')">Remove</button>
+        </div>
+      `).join('');
+    }
+    
+    if (totalEl) {
+      totalEl.textContent = '₹' + this.getTotal();
+    }
+  }
+};
+
+function openCart() {
+  const drawer = document.getElementById('cart-drawer');
+  const overlay = document.getElementById('cart-overlay');
+  if (drawer) drawer.classList.add('open');
+  if (overlay) overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  const drawer = document.getElementById('cart-drawer');
+  const overlay = document.getElementById('cart-overlay');
+  if (drawer) drawer.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function quickAdd(id, name, price) {
+  Cart.add({ id, name, price, image: null });
+  openCart();
+}
+
+// Initialize cart
+Cart.init();
+</script>
+
+</body>
+</html>

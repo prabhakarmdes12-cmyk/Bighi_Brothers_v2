@@ -1,0 +1,2787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bighi Brothers — D2C Transformation Blueprint v2.0.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5EFE0;
+  --forest: #1C3A2E;
+  --amber: #C8831A;
+  --amberl: #E8A830;
+  --offwhite: #FAF7F2;
+  --charcoal: #2D2D2D;
+  --warm: #8C8070;
+  --border: rgba(28,58,46,0.11);
+  --red: #C0392B;
+  --green: #27AE60;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'EB Garamond', serif;
+  background: var(--offwhite);
+  color: var(--charcoal);
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+/* ── COVER ── */
+.cover {
+  background: var(--forest);
+  color: var(--cream);
+  padding: 80px 80px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,131,26,0.18) 0%, transparent 70%);
+}
+.cover-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amberl);
+  margin-bottom: 18px;
+}
+.cover h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--cream);
+  max-width: 780px;
+  margin-bottom: 22px;
+}
+.cover h1 em { color: var(--amberl); font-style: italic; }
+.cover-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(245,239,224,0.65);
+  max-width: 600px;
+  margin-bottom: 44px;
+}
+.cover-meta {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.cm {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,239,224,0.45);
+}
+.cm b { color: var(--amberl); display: block; font-size: 0.95rem; margin-top: 2px; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.05em; }
+
+/* ── VERSION HISTORY ── */
+.version-history {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 80px;
+}
+.vh-header {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 14px;
+}
+.vh-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.vh-table thead { background: var(--forest); color: var(--cream); }
+.vh-table thead th {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 500;
+}
+.vh-table tbody tr { border-bottom: 1px solid var(--border); }
+.vh-table tbody tr:nth-child(even) { background: rgba(28,58,46,0.03); }
+.vh-table tbody td { padding: 10px 14px; vertical-align: top; }
+.vh-table .version-num { font-family: 'DM Mono', monospace; font-weight: 600; color: var(--forest); }
+.vh-table .version-date { color: var(--warm); font-size: 0.82rem; }
+.vh-table .version-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.vh-table .version-tag.major { background: var(--forest); color: var(--amberl); }
+.vh-table .version-tag.minor { background: rgba(200,131,26,0.15); color: var(--amber); }
+.vh-table .version-tag.fix { background: rgba(44,44,44,0.08); color: var(--warm); }
+
+/* ── COMPETITIVE ANALYSIS ── */
+.comp-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.88rem; }
+.comp-table thead { background: var(--forest); color: var(--cream); }
+.comp-table thead th {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 500;
+}
+.comp-table tbody tr { border-bottom: 1px solid var(--border); }
+.comp-table tbody tr:nth-child(even) { background: var(--cream); }
+.comp-table tbody td { padding: 12px 14px; vertical-align: top; }
+.comp-table .brand-name { font-weight: 600; color: var(--forest); }
+.comp-table .check { color: var(--green); }
+.comp-table .partial { color: var(--amber); }
+.comp-table .missing { color: var(--red); }
+.comp-table .tier-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.comp-table .tier-badge.premium { background: var(--forest); color: var(--amberl); }
+.comp-table .tier-badge.mid { background: rgba(200,131,26,0.15); color: var(--amber); }
+.comp-table .tier-badge.entry { background: rgba(44,44,44,0.08); color: var(--warm); }
+
+/* ── KPI FRAMEWORK ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.kpi-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 20px 22px;
+}
+.kpi-card .kpi-icon { font-size: 1.4rem; margin-bottom: 10px; }
+.kpi-card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--forest);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.kpi-card .kpi-target {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--amber);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.kpi-card .kpi-baseline { font-size: 0.75rem; color: var(--warm); margin-bottom: 8px; }
+.kpi-card .kpi-formula {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--charcoal);
+  background: rgba(28,58,46,0.06);
+  padding: 6px 10px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+.kpi-card .kpi-frequency { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm); }
+.kpi-card.revenue { border-left: 3px solid var(--forest); }
+.kpi-card.conversion { border-left: 3px solid var(--amber); }
+.kpi-card.retention { border-left: 3px solid var(--green); }
+.kpi-card.experience { border-left: 3px solid rgba(200,131,26,0.5); }
+
+/* ── METRICS DASHBOARD ── */
+.metrics-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.88rem; }
+.metrics-table thead { background: var(--forest); color: var(--cream); }
+.metrics-table thead th {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 500;
+}
+.metrics-table tbody tr { border-bottom: 1px solid var(--border); }
+.metrics-table tbody tr:nth-child(even) { background: var(--cream); }
+.metrics-table tbody td { padding: 10px 12px; vertical-align: top; }
+.metrics-table .metric-name { font-weight: 600; color: var(--forest); }
+.metrics-table .metric-current { color: var(--charcoal); }
+.metrics-table .metric-target { color: var(--green); font-weight: 600; }
+.metrics-table .metric-trend { font-family: 'DM Mono', monospace; font-size: 0.75rem; }
+.metrics-table .trend.up { color: var(--green); }
+.metrics-table .trend.down { color: var(--red); }
+.metrics-table .trend.neutral { color: var(--warm); }
+
+/* ── QUARTERLY ROADMAP ── */
+.roadmap-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.roadmap-quarter { border-right: 1px solid var(--border); }
+.roadmap-quarter:last-child { border-right: none; }
+.rq-header {
+  padding: 14px 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+.rq-header.q1 { background: var(--forest); }
+.rq-header.q2 { background: rgba(28,58,46,0.85); }
+.rq-header.q3 { background: var(--amber); }
+.rq-header.q4 { background: rgba(28,58,46,0.7); }
+.rq-body { padding: 16px; background: var(--cream); min-height: 200px; }
+.rq-item { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(28,58,46,0.1); }
+.rq-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.rq-priority {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 2px;
+  margin-bottom: 4px;
+}
+.rq-priority.critical { background: rgba(192,57,43,0.15); color: var(--red); }
+.rq-priority.high { background: rgba(200,131,26,0.15); color: var(--amber); }
+.rq-priority.medium { background: rgba(28,58,46,0.08); color: var(--warm); }
+.rq-task { font-size: 0.82rem; color: var(--charcoal); line-height: 1.4; }
+
+/* ── TECH RECOMMENDATIONS ── */
+.tech-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 18px 20px;
+  margin-top: 14px;
+}
+.tech-card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--forest);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.tech-card ul { list-style: none; font-size: 0.85rem; color: var(--charcoal); }
+.tech-card ul li { padding: 4px 0; display: flex; gap: 8px; }
+.tech-card ul li::before { content: '→'; color: var(--amber); flex-shrink: 0; }
+
+/* ── ADMIN PANEL STYLES ── */
+.admin-mockup { background: var(--cream); border: 1px solid var(--border); border-radius: 3px; padding: 20px; margin-top: 16px; }
+.admin-mockup h5 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.admin-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.admin-stat {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 16px;
+  text-align: center;
+}
+.admin-stat .stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--forest);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.admin-stat .stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--warm);
+}
+.admin-stat .stat-change {
+  font-size: 0.7rem;
+  margin-top: 4px;
+}
+.admin-stat .stat-change.up { color: var(--green); }
+.admin-stat .stat-change.down { color: var(--red); }
+
+.admin-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.admin-table thead { background: var(--forest); color: var(--cream); }
+.admin-table thead th {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 500;
+}
+.admin-table tbody tr { border-bottom: 1px solid var(--border); }
+.admin-table tbody tr:hover { background: rgba(28,58,46,0.03); }
+.admin-table tbody td { padding: 10px 12px; vertical-align: middle; }
+.admin-table .status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.status-badge.pending { background: rgba(200,131,26,0.15); color: var(--amber); }
+.status-badge.processing { background: rgba(39,174,96,0.15); color: var(--green); }
+.status-badge.shipped { background: rgba(28,58,46,0.1); color: var(--forest); }
+.status-badge.cancelled { background: rgba(192,57,43,0.15); color: var(--red); }
+.status-badge.low { background: rgba(192,57,43,0.15); color: var(--red); }
+.status-badge.ok { background: rgba(39,174,96,0.15); color: var(--green); }
+
+.feature-list { margin-top: 16px; }
+.feature-list h5 { margin-bottom: 12px; }
+.feature-list ul { list-style: none; font-size: 0.85rem; color: var(--charcoal); }
+.feature-list ul li { padding: 6px 0; display: flex; gap: 10px; align-items: flex-start; }
+.feature-list ul li::before { content: '✓'; color: var(--amber); flex-shrink: 0; margin-top: 2px; }
+.feature-list ul li ul { margin-left: 20px; margin-top: 4px; }
+.feature-list ul li ul li::before { content: '→'; font-size: 0.7rem; }
+
+.admin-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.admin-tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warm);
+  cursor: pointer;
+}
+.admin-tab.active { color: var(--forest); border-bottom-color: var(--amber); }
+.admin-tab:hover { color: var(--forest); }
+
+.role-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 16px 18px;
+  margin-top: 12px;
+}
+.role-card h5 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--forest);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.role-card .role-perms {
+  font-size: 0.8rem;
+  color: var(--warm);
+  line-height: 1.6;
+}
+.role-card .role-perms span {
+  display: inline-block;
+  background: rgba(28,58,46,0.06);
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin: 2px;
+  font-size: 0.72rem;
+}
+
+/* ── TOC ── */
+.toc {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 36px 80px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.toc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-right: 10px;
+}
+.toc a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--forest);
+  text-decoration: none;
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  transition: all 0.25s;
+}
+.toc a:hover { background: var(--forest); color: var(--cream); }
+
+/* ── MAIN LAYOUT ── */
+.doc { max-width: 1100px; margin: 0 auto; padding: 0 80px 120px; }
+
+/* ── SECTION ── */
+.section {
+  padding: 72px 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 72px;
+}
+.section:first-child { border-top: none; margin-top: 48px; }
+.sec-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--forest);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.section h2 em { font-style: italic; color: var(--amber); }
+.sec-intro {
+  font-style: italic;
+  color: var(--warm);
+  font-size: 1rem;
+  margin-bottom: 36px;
+  max-width: 620px;
+}
+
+/* ── SUBSECTION ── */
+.sub {
+  margin-top: 40px;
+}
+.sub h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--forest);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sub h3::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--amber);
+  display: block;
+}
+
+/* ── CARDS ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+.card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 22px 24px;
+}
+.card-icon { font-size: 1.4rem; margin-bottom: 10px; }
+.card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--forest);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.card p {
+  font-size: 0.92rem;
+  color: var(--warm);
+  line-height: 1.65;
+}
+.card.warn { border-color: rgba(192,57,43,0.25); background: rgba(192,57,43,0.04); }
+.card.warn h4 { color: var(--red); }
+.card.ok { border-color: rgba(39,174,96,0.25); background: rgba(39,174,96,0.04); }
+.card.ok h4 { color: var(--green); }
+.card.amber { border-color: rgba(200,131,26,0.25); background: rgba(200,131,26,0.04); }
+.card.amber h4 { color: var(--amber); }
+
+/* ── TABLE ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.92rem;
+}
+thead tr {
+  background: var(--forest);
+  color: var(--cream);
+}
+thead th {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 500;
+}
+tbody tr { border-bottom: 1px solid var(--border); }
+tbody tr:nth-child(even) { background: var(--cream); }
+tbody td { padding: 11px 16px; color: var(--charcoal); vertical-align: top; }
+tbody td:first-child { font-weight: 500; color: var(--forest); }
+
+/* ── FLOW DIAGRAM ── */
+.flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.flow-step {
+  flex: 1;
+  min-width: 140px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 18px 16px;
+  position: relative;
+  text-align: center;
+}
+.flow-step + .flow-step { margin-left: -1px; }
+.flow-step.active { background: var(--forest); border-color: var(--forest); }
+.flow-step.active .fs-n { color: var(--amberl); }
+.flow-step.active .fs-t { color: var(--cream); }
+.flow-step.active .fs-d { color: rgba(245,239,224,0.6); }
+.flow-step.highlight { background: rgba(200,131,26,0.08); border-color: rgba(200,131,26,0.3); }
+.fs-n {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 6px;
+}
+.fs-t {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--forest);
+  margin-bottom: 4px;
+}
+.fs-d {
+  font-size: 0.78rem;
+  color: var(--warm);
+  line-height: 1.5;
+}
+.arrow {
+  align-self: center;
+  color: var(--amber);
+  font-size: 1.1rem;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+/* ── PRIORITY MATRIX ── */
+.priority-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+.priority-col { background: var(--cream); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
+.priority-col-head {
+  padding: 14px 18px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.priority-col-head.mvp { background: var(--forest); color: var(--amberl); }
+.priority-col-head.adv { background: var(--amber); color: white; }
+.priority-col-head.game { background: var(--charcoal); color: var(--amberl); }
+.priority-item {
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.priority-item:last-child { border-bottom: none; }
+.pi-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+.pi-dot.mvp { background: var(--forest); }
+.pi-dot.adv { background: var(--amber); }
+.pi-dot.game { background: var(--charcoal); }
+
+/* ── BEFORE/AFTER ── */
+.ba-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+.ba-box { border-radius: 3px; padding: 22px 24px; }
+.ba-box.before { background: rgba(192,57,43,0.05); border: 1px solid rgba(192,57,43,0.18); }
+.ba-box.after { background: rgba(39,174,96,0.05); border: 1px solid rgba(39,174,96,0.18); }
+.ba-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.ba-box.before .ba-label { color: var(--red); }
+.ba-box.after .ba-label { color: var(--green); }
+.ba-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--charcoal);
+  line-height: 1.5;
+}
+
+/* ── CALLOUT ── */
+.callout {
+  background: var(--forest);
+  color: var(--cream);
+  border-radius: 3px;
+  padding: 28px 32px;
+  margin-top: 28px;
+}
+.callout-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amberl);
+  margin-bottom: 10px;
+}
+.callout p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(245,239,224,0.85);
+}
+.callout strong { color: var(--amberl); }
+
+/* ── ARCH DIAGRAM ── */
+.arch {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 28px;
+  margin-top: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--charcoal);
+  line-height: 2;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+.arch-comment { color: var(--warm); }
+.arch-box { color: var(--forest); font-weight: 400; }
+.arch-arrow { color: var(--amber); }
+.arch-label { color: var(--amberl); }
+
+/* ── LIST STYLED ── */
+ul.styled {
+  list-style: none;
+  margin-top: 14px;
+}
+ul.styled li {
+  padding: 8px 0;
+  padding-left: 22px;
+  position: relative;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(28,58,46,0.06);
+  color: var(--charcoal);
+}
+ul.styled li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+  font-size: 0.85rem;
+}
+ul.styled li:last-child { border-bottom: none; }
+ul.styled li strong { color: var(--forest); }
+
+/* ── WHATSAPP FLOW ── */
+.wa-flow {
+  background: #ECE5DD;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 20px;
+  max-width: 400px;
+}
+.wa-msg {
+  background: white;
+  border-radius: 0 8px 8px 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  position: relative;
+}
+.wa-msg.sent {
+  background: #D9FDD3;
+  border-radius: 8px 0 8px 8px;
+  margin-left: 40px;
+}
+.wa-time {
+  font-size: 0.65rem;
+  color: #999;
+  text-align: right;
+  margin-top: 3px;
+}
+.wa-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #25D366;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── FOOTER ── */
+.doc-footer {
+  background: var(--forest);
+  color: rgba(245,239,224,0.55);
+  text-align: center;
+  padding: 32px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  margin-top: 80px;
+}
+
+@media (max-width: 768px) {
+  .cover, .toc, .doc { padding-left: 24px; padding-right: 24px; }
+  .priority-grid { grid-template-columns: 1fr; }
+  .ba-grid { grid-template-columns: 1fr; }
+  .flow-step { min-width: 100px; }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Confidential · Strategic Blueprint</div>
+  <h1>Bighi Brothers — <em>D2C System</em><br>Transformation Blueprint</h1>
+  <p class="cover-sub">From a beautiful static website to a behavior-driven commerce system that builds routines, drives retention, and compounds growth.</p>
+  <div class="cover-meta">
+    <div class="cm">Brand<b>Bighi Brothers Industries Pvt. Ltd.</b></div>
+    <div class="cm">Document Type<b>Product Transformation Strategy</b></div>
+    <div class="cm">Horizon<b>MVP → 6 Months</b></div>
+    <div class="cm">Framework<b>Routine Engine + Retention OS</b></div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <span class="toc-label">Sections —</span>
+  <a href="#version">00 Version History</a>
+  <a href="#competitive">Competitive</a>
+  <a href="#kpis">KPIs</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#audit">01 Audit</a>
+  <a href="#product">02 Product Layer</a>
+  <a href="#flows">03 UX Flows</a>
+  <a href="#retention">04 Retention OS</a>
+  <a href="#priority">05 Prioritization</a>
+  <a href="#positioning">06 Positioning</a>
+  <a href="#ui">07 UI Enhancements</a>
+  <a href="#tech">08 Tech Stack</a>
+  <a href="#admin">09 Admin Panel</a>
+</div>
+
+<!-- ═══════════════════════════════ VERSION HISTORY ═══════════════════════════════ -->
+<div class="version-history" id="version">
+  <div class="vh-header">Document Version History</div>
+  <table class="vh-table">
+    <thead>
+      <tr>
+        <th>Version</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Changes</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="version-num">v2.0.0</td>
+        <td class="version-date">March 2026</td>
+        <td><span class="version-tag major">Major Release</span></td>
+        <td>Added: Competitive analysis benchmark, KPI framework with success metrics, quarterly implementation roadmap, enhanced tech stack recommendations, success metrics dashboard, version tracking</td>
+        <td>Internal</td>
+      </tr>
+      <tr>
+        <td class="version-num">v1.0.0</td>
+        <td class="version-date">2025</td>
+        <td><span class="version-tag major">Initial Release</span></td>
+        <td>Initial D2C transformation blueprint with 8-step framework: Audit, Product Layer, UX Flows, Retention OS, Prioritization, Positioning, UI Enhancements, Tech Stack</td>
+        <td>Internal</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════ COMPETITIVE ANALYSIS ═══════════════════════════════ -->
+<div class="section" id="competitive">
+  <div class="sec-num">Pre-Analysis · Competitive Benchmark</div>
+  <h2>Where Bighi Brothers <em>Stands</em></h2>
+  <p class="sec-intro">Understanding the Indian natural skincare landscape to identify differentiation opportunities and avoid commoditization traps.</p>
+
+  <div class="sub">
+    <h3>Competitive Landscape</h3>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Tier</th>
+          <th>Routine System</th>
+          <th>Personalization</th>
+          <th>WhatsApp Retention</th>
+          <th>Subscription</th>
+          <th>Handmade Story</th>
+          <th>Bighi Opportunity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="brand-name">Forest Essentials</td>
+          <td><span class="tier-badge premium">Ultra Premium</span></td>
+          <td class="check">✓ Ayurvedic rituals</td>
+          <td class="partial">Skin consultation</td>
+          <td class="missing">✗ Email only</td>
+          <td class="check">✓ Gift subscriptions</td>
+          <td class="check">✓ Heritage + craft</td>
+          <td rowspan="4" style="background: rgba(200,131,26,0.06); vertical-align: middle; text-align: center; font-weight: 600; color: var(--forest);">Win on <span style="color: var(--amber);">WhatsApp-first</span> retention + <span style="color: var(--amber);">simplicity</span></td>
+        </tr>
+        <tr>
+          <td class="brand-name">Kama Ayurveda</td>
+          <td><span class="tier-badge premium">Premium</span></td>
+          <td class="partial">Dosha concepts</td>
+          <td class="partial">Limited quiz</td>
+          <td class="missing">✗ Email only</td>
+          <td class="partial">Reorder only</td>
+          <td class="check">✓ Ayurvedic roots</td>
+        </tr>
+        <tr>
+          <td class="brand-name">Soulflower</td>
+          <td><span class="tier-badge entry">Mass</span></td>
+          <td class="missing">✗ None</td>
+          <td class="missing">✗ None</td>
+          <td class="partial">Basic broadcasts</td>
+          <td class="missing">✗ None</td>
+          <td class="partial">Eco/women artisan</td>
+        </tr>
+        <tr>
+          <td class="brand-name">Bighi Brothers</td>
+          <td><span class="tier-badge mid">Aspirational</span></td>
+          <td class="missing">✗ Not yet (opportunity)</td>
+          <td class="missing">✗ Not yet (opportunity)</td>
+          <td class="partial">Basic WA widget</td>
+          <td class="missing">✗ Not yet (opportunity)</td>
+          <td class="check">✓ Handmade authenticity</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub">
+    <h3>Differentiation Matrix</h3>
+    <div class="cards">
+      <div class="card ok">
+        <div class="card-icon">🎯</div>
+        <h4>Be the "Simple Ritual" Brand</h4>
+        <p>Forest Essentials = luxury Ayurvedic. Kama = clinical Ayurveda. Bighi = <strong>warm, approachable daily rituals</strong>. Own "ritual, not routine" positioning that neither competitor uses.</p>
+      </div>
+      <div class="card ok">
+        <div class="card-icon">📱</div>
+        <h4>Own WhatsApp-First</h4>
+        <p>No premium competitor uses WhatsApp as primary retention. Be the first Indian skincare brand where <strong>WhatsApp is the primary post-purchase channel</strong>, not email.</p>
+      </div>
+      <div class="card ok">
+        <div class="card-icon">🏭</div>
+        <h4>Handmade Transparency</h4>
+        <p>Show the batch number, the maker's name, and the "born on" date on every product. No competitor does this. It's an authenticity signal that scales with social proof.</p>
+      </div>
+      <div class="card ok">
+        <div class="card-icon">💬</div>
+        <h4>Human Voice, Not Brand Voice</h4>
+        <p>WhatsApp messages should sound like a friend, not a brand. Kama and Forest Essentials are polished. Bighi should feel like the maker texting you directly.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ KPI FRAMEWORK ═══════════════════════════════ -->
+<div class="section" id="kpis">
+  <div class="sec-num">Pre-Analysis · KPI Framework</div>
+  <h2>Success Metrics <em>That Matter</em></h2>
+  <p class="sec-intro">Every initiative must map to measurable outcomes. Track these weekly from Day 1 of implementation.</p>
+
+  <div class="sub">
+    <h3>Revenue Metrics</h3>
+    <div class="kpi-grid">
+      <div class="kpi-card revenue">
+        <div class="kpi-icon">💰</div>
+        <h4>Monthly Recurring Revenue</h4>
+        <div class="kpi-target">₹2.5L → ₹8L</div>
+        <div class="kpi-baseline">Baseline: ₹1.2L (existing wholesale + direct)</div>
+        <div class="kpi-formula">New MRR = (New Customers × AOV × Purchase Frequency) + (Existing Subscribers × Subscription Value)</div>
+        <div class="kpi-frequency">Track: Monthly</div>
+      </div>
+      <div class="kpi-card revenue">
+        <div class="kpi-icon">🔄</div>
+        <h4>Repeat Purchase Rate</h4>
+        <div class="kpi-target">15% → 40%</div>
+        <div class="kpi-baseline">Baseline: ~8% (estimated from existing customer base)</div>
+        <div class="kpi-formula">% of customers who place 2nd+ order within 90 days</div>
+        <div class="kpi-frequency">Track: Monthly</div>
+      </div>
+      <div class="kpi-card revenue">
+        <div class="kpi-icon">📦</div>
+        <h4>Subscription Conversion</h4>
+        <div class="kpi-target">5% → 20%</div>
+        <div class="kpi-baseline">Baseline: 0% (no subscription model)</div>
+        <div class="kpi-formula">% of one-time buyers who upgrade to monthly subscription</div>
+        <div class="kpi-frequency">Track: Per checkout flow</div>
+      </div>
+      <div class="kpi-card revenue">
+        <div class="kpi-icon">📈</div>
+        <h4>Average Order Value</h4>
+        <div class="kpi-target">₹350 → ₹550</div>
+        <div class="kpi-baseline">Baseline: ₹280 (single product)</div>
+        <div class="kpi-formula">Total Revenue ÷ Number of Orders (with routine upsell)</div>
+        <div class="kpi-frequency">Track: Weekly</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Conversion Metrics</h3>
+    <div class="kpi-grid">
+      <div class="kpi-card conversion">
+        <div class="kpi-icon">🎯</div>
+        <h4>Quiz Completion Rate</h4>
+        <div class="kpi-target">20% → 35%</div>
+        <div class="kpi-baseline">Baseline: 0% (no quiz exists)</div>
+        <div class="kpi-formula">% of homepage visitors who complete the skin quiz</div>
+        <div class="kpi-frequency">Track: Weekly</div>
+      </div>
+      <div class="kpi-card conversion">
+        <div class="kpi-icon">🛒</div>
+        <h4>Add to Routine Rate</h4>
+        <div class="kpi-target">N/A → 25%</div>
+        <div class="kpi-baseline">Baseline: N/A (new metric)</div>
+        <div class="kpi-formula">% of product page visitors who tap "Add to Routine" vs "Add to Cart"</div>
+        <div class="kpi-frequency">Track: Per product page view</div>
+      </div>
+      <div class="kpi-card conversion">
+        <div class="kpi-icon">✅</div>
+        <h4>Checkout Completion</h4>
+        <div class="kpi-target">60% → 75%</div>
+        <div class="kpi-baseline">Baseline: ~45% (current WhatsApp catalog flow)</div>
+        <div class="kpi-formula">% of users who start checkout who complete purchase</div>
+        <div class="kpi-frequency">Track: Daily</div>
+      </div>
+      <div class="kpi-card conversion">
+        <div class="kpi-icon">💬</div>
+        <h4>WA Opt-in Rate</h4>
+        <div class="kpi-target">30% → 60%</div>
+        <div class="kpi-baseline">Baseline: ~15% (current checkout)</div>
+        <div class="kpi-formula">% of purchasers who consent to WhatsApp messaging</div>
+        <div class="kpi-frequency">Track: Per checkout</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Retention Metrics</h3>
+    <div class="kpi-grid">
+      <div class="kpi-card retention">
+        <div class="kpi-icon">🔁</div>
+        <h4>Refill Order Rate</h4>
+        <div class="kpi-target">10% → 45%</div>
+        <div class="kpi-baseline">Baseline: ~5% (organic, no automation)</div>
+        <div class="kpi-formula">% of customers who reorder within 45 days of first purchase (via WA automation)</div>
+        <div class="kpi-frequency">Track: 45-day cohort</div>
+      </div>
+      <div class="kpi-card retention">
+        <div class="kpi-icon">⏱️</div>
+        <h4>Customer Lifetime Value</h4>
+        <div class="kpi-target">₹400 → ₹2,500</div>
+        <div class="kpi-baseline">Baseline: ₹320 (single purchase)</div>
+        <div class="kpi-formula">Average Revenue Per Customer × Purchase Frequency × Average Lifespan (24 months)</div>
+        <div class="kpi-frequency">Track: Quarterly cohort</div>
+      </div>
+      <div class="kpi-card retention">
+        <div class="kpi-icon">📊</div>
+        <h4>Net Promoter Score</h4>
+        <div class="kpi-target">Baseline → 50+</div>
+        <div class="kpi-baseline">Baseline: Unknown (measure at Day 30 post-launch)</div>
+        <div class="kpi-formula">% Promoters (9-10) - % Detractors (0-6) from post-purchase survey</div>
+        <div class="kpi-frequency">Track: Quarterly</div>
+      </div>
+      <div class="kpi-card retention">
+        <div class="kpi-icon">🏆</div>
+        <h4>Churn Rate (Monthly)</h4>
+        <div class="kpi-target">N/A → &lt;8%</div>
+        <div class="kpi-baseline">Baseline: Unknown (subscription model doesn't exist)</div>
+        <div class="kpi-formula">% of subscribers who cancel within first 90 days</div>
+        <div class="kpi-frequency">Track: Monthly</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Experience Metrics</h3>
+    <div class="kpi-grid">
+      <div class="kpi-card experience">
+        <div class="kpi-icon">⭐</div>
+        <h4>Product Review Rate</h4>
+        <div class="kpi-target">2% → 15%</div>
+        <div class="kpi-baseline">Baseline: ~1% (passive收集)</div>
+        <div class="kpi-formula">% of purchasers who leave a verified review after 30 days</div>
+        <div class="kpi-frequency">Track: 30-day post-purchase</div>
+      </div>
+      <div class="kpi-card experience">
+        <div class="kpi-icon">🌐</div>
+        <h4>Page Performance</h4>
+        <div class="kpi-target">LCP &lt;2.5s</div>
+        <div class="kpi-baseline">Current: Unknown (measure with Plausible)</div>
+        <div class="kpi-formula">Largest Contentful Paint via Core Web Vitals</div>
+        <div class="kpi-frequency">Track: Continuous (Plausible)</div>
+      </div>
+      <div class="kpi-card experience">
+        <div class="kpi-icon">♿</div>
+        <h4>Accessibility Score</h4>
+        <div class="kpi-target">60 → 90+</div>
+        <div class="kpi-baseline">Baseline: ~40 (estimated from current implementation)</div>
+        <div class="kpi-formula">Lighthouse Accessibility Score</div>
+        <div class="kpi-frequency">Track: Per release</div>
+      </div>
+      <div class="kpi-card experience">
+        <div class="kpi-icon">📱</div>
+        <h4>Mobile Conversion Rate</h4>
+        <div class="kpi-target">Desktop → 1:1 parity</div>
+        <div class="kpi-baseline">Baseline: ~0.6x desktop (estimate)</div>
+        <div class="kpi-formula">Mobile checkout completions ÷ Mobile product page views</div>
+        <div class="kpi-frequency">Track: Weekly</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ QUARTERLY ROADMAP ═══════════════════════════════ -->
+<div class="section" id="roadmap">
+  <div class="sec-num">Implementation · Roadmap</div>
+  <h2>12-Month <em>Execution Plan</em></h2>
+  <p class="sec-intro">Phased implementation ensuring early wins while building toward full retention system maturity.</p>
+
+  <div class="roadmap-timeline">
+    <div class="roadmap-quarter">
+      <div class="rq-header q1">Q1 2026 · Foundation</div>
+      <div class="rq-body">
+        <div class="rq-item">
+          <span class="rq-priority critical">Critical</span>
+          <div class="rq-task">Set up Razorpay + native checkout</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority critical">Critical</span>
+          <div class="rq-task">Build Airtable customer database</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority critical">Critical</span>
+          <div class="rq-task">WhatsApp Business API via Interakt</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Basic post-purchase automation (Day 0, 22)</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Add routine step labels to products</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority medium">Medium</span>
+          <div class="rq-task">Install Plausible analytics</div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-quarter">
+      <div class="rq-header q2">Q2 2026 · Engagement</div>
+      <div class="rq-body">
+        <div class="rq-item">
+          <span class="rq-priority critical">Critical</span>
+          <div class="rq-task">Launch skin quiz + routine builder</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority critical">Critical</span>
+          <div class="rq-task">Implement personalized product sorting</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Full 6-touchpoint post-purchase sequence</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Routine completion upsell at checkout</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Add "1-click reorder" to WhatsApp</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority medium">Medium</span>
+          <div class="rq-task">A/B test hero messaging</div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-quarter">
+      <div class="rq-header q3">Q3 2026 · Growth</div>
+      <div class="rq-body">
+        <div class="rq-item">
+          <span class="rq-priority critical">Critical</span>
+          <div class="rq-task">Launch "Subscribe & Save" (10% off)</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Implement collaborative filtering ("also bought")</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Seasonal product rotation (Summer → Monsoon)</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority medium">Medium</span>
+          <div class="rq-task">Referral program ("Share your ritual")</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority medium">Medium</span>
+          <div class="rq-task">Launch customer UGC "Ritual Wall"</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority medium">Medium</span>
+          <div class="rq-task">Add batch transparency (maker name, date)</div>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-quarter">
+      <div class="rq-header q4">Q4 2026 · Scale</div>
+      <div class="rq-body">
+        <div class="rq-item">
+          <span class="rq-priority critical">Critical</span>
+          <div class="rq-task">Launch loyalty points system</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Birthday/anniversary automated gifts</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority high">High</span>
+          <div class="rq-task">Churn prediction model (Make.com)</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority medium">Medium</span>
+          <div class="rq-task">Hindi WhatsApp message variants</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority medium">Medium</span>
+          <div class="rq-task">Performance optimization sprint</div>
+        </div>
+        <div class="rq-item">
+          <span class="rq-priority medium">Medium</span>
+          <div class="rq-task">Year 2 strategy planning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Success Metrics Dashboard</h3>
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Current</th>
+          <th>Q1 Target</th>
+          <th>Q2 Target</th>
+          <th>Q3 Target</th>
+          <th>Q4 Target</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="metric-name">Monthly Revenue</td>
+          <td class="metric-current">₹1.2L</td>
+          <td class="metric-target">₹1.8L</td>
+          <td class="metric-target">₹3.5L</td>
+          <td class="metric-target">₹5.5L</td>
+          <td class="metric-target">₹8L</td>
+          <td class="metric-trend neutral">—</td>
+        </tr>
+        <tr>
+          <td class="metric-name">Repeat Purchase Rate</td>
+          <td class="metric-current">8%</td>
+          <td class="metric-target">15%</td>
+          <td class="metric-target">25%</td>
+          <td class="metric-target">32%</td>
+          <td class="metric-target">40%</td>
+          <td class="metric-trend neutral">—</td>
+        </tr>
+        <tr>
+          <td class="metric-name">WhatsApp Opt-in</td>
+          <td class="metric-current">15%</td>
+          <td class="metric-target">35%</td>
+          <td class="metric-target">45%</td>
+          <td class="metric-target">55%</td>
+          <td class="metric-target">60%</td>
+          <td class="metric-trend neutral">—</td>
+        </tr>
+        <tr>
+          <td class="metric-name">Avg Order Value</td>
+          <td class="metric-current">₹280</td>
+          <td class="metric-target">₹350</td>
+          <td class="metric-target">₹420</td>
+          <td class="metric-target">₹480</td>
+          <td class="metric-target">₹550</td>
+          <td class="metric-trend neutral">—</td>
+        </tr>
+        <tr>
+          <td class="metric-name">Quiz Completion Rate</td>
+          <td class="metric-current">N/A</td>
+          <td class="metric-target">25%</td>
+          <td class="metric-target">30%</td>
+          <td class="metric-target">32%</td>
+          <td class="metric-target">35%</td>
+          <td class="metric-trend neutral">—</td>
+        </tr>
+        <tr>
+          <td class="metric-name">Refill Automation Rate</td>
+          <td class="metric-current">5%</td>
+          <td class="metric-target">20%</td>
+          <td class="metric-target">30%</td>
+          <td class="metric-target">38%</td>
+          <td class="metric-target">45%</td>
+          <td class="metric-trend neutral">—</td>
+        </tr>
+        <tr>
+          <td class="metric-name">CLV (Customer Lifetime Value)</td>
+          <td class="metric-current">₹400</td>
+          <td class="metric-target">₹700</td>
+          <td class="metric-target">₹1,200</td>
+          <td class="metric-target">₹1,800</td>
+          <td class="metric-target">₹2,500</td>
+          <td class="metric-trend neutral">—</td>
+        </tr>
+        <tr>
+          <td class="metric-name">NPS (Net Promoter Score)</td>
+          <td class="metric-current">TBD</td>
+          <td class="metric-target">35</td>
+          <td class="metric-target">42</td>
+          <td class="metric-target">47</td>
+          <td class="metric-target">50+</td>
+          <td class="metric-trend neutral">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="doc">
+
+<!-- ═══════════════════════════════ STEP 1 ═══════════════════════════════ -->
+<div class="section" id="audit">
+  <div class="sec-num">Step 01 · Audit</div>
+  <h2>Deep Analysis — <em>What's Missing</em></h2>
+  <p class="sec-intro">The site is aesthetically strong. Playfair + Cormorant + forest/amber palette is a genuine premium signal. But it is currently a beautiful brochure, not a system.</p>
+
+  <div class="sub">
+    <h3>What the Site Does Well</h3>
+    <div class="cards">
+      <div class="card ok">
+        <div class="card-icon">✅</div>
+        <h4>Brand Identity</h4>
+        <p>Forest/cream/amber palette, serif typography, and noise texture create a premium artisan feel that differentiates from mass-market brands.</p>
+      </div>
+      <div class="card ok">
+        <div class="card-icon">✅</div>
+        <h4>Trust Signals</h4>
+        <p>Trust bar with "No SLS · No Parabens", handcrafted batches, 1,000+ customers, Made in India. These are the right inputs.</p>
+      </div>
+      <div class="card ok">
+        <div class="card-icon">✅</div>
+        <h4>WhatsApp CTA</h4>
+        <p>Floating WhatsApp widget is the single most important retention asset on the page. Already present — just completely under-leveraged.</p>
+      </div>
+      <div class="card ok">
+        <div class="card-icon">✅</div>
+        <h4>Product Signals</h4>
+        <p>Ingredient chips on hover, price + MRP discount display, star ratings, and product categories are all solid commerce fundamentals.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Critical UX Gaps</h3>
+    <div class="cards">
+      <div class="card warn">
+        <div class="card-icon">🚨</div>
+        <h4>No User Identity Layer</h4>
+        <p>Zero login, zero account, zero memory of the user. Every visitor is a stranger. You can't build retention without identity.</p>
+      </div>
+      <div class="card warn">
+        <div class="card-icon">🚨</div>
+        <h4>No Routine Context</h4>
+        <p>Products are listed as isolated items — soap, lip balm, cream. There is no concept of "your morning routine" or "your haircare stack." No stacking logic exists.</p>
+      </div>
+      <div class="card warn">
+        <div class="card-icon">🚨</div>
+        <h4>No Post-Purchase System</h4>
+        <p>What happens after someone orders? Nothing. No follow-up, no refill nudge, no routine check-in. The relationship ends at checkout.</p>
+      </div>
+      <div class="card warn">
+        <div class="card-icon">🚨</div>
+        <h4>No Subscription / Refill Mechanism</h4>
+        <p>A ₹50 soap lasts ~30 days. With 1,000+ customers, there is a massive predictable refill opportunity being entirely ignored.</p>
+      </div>
+      <div class="card warn">
+        <div class="card-icon">🚨</div>
+        <h4>No Skin Profile / Personalization</h4>
+        <p>A new user lands on the page and sees all products equally. No quiz, no filter by concern, no "products for oily skin" pathway.</p>
+      </div>
+      <div class="card warn">
+        <div class="card-icon">🚨</div>
+        <h4>Checkout Dead-End</h4>
+        <p>All product links go to the old Wix site. The brand experience breaks entirely at the most critical conversion moment. This is a catastrophic leakage.</p>
+      </div>
+      <div class="card warn">
+        <div class="card-icon">🚨</div>
+        <h4>No Urgency / Behavioral Triggers</h4>
+        <p>No "only 12 left," no "37 people viewing this," no limited-batch messaging. Handmade products are naturally scarce — this isn't communicated.</p>
+      </div>
+      <div class="card warn">
+        <div class="card-icon">🚨</div>
+        <h4>Newsletter is Inert</h4>
+        <p>Footer email input exists but leads nowhere. No automation, no welcome sequence, no value hook to justify signing up.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Where Users Drop Off</h3>
+    <table>
+      <thead>
+        <tr><th>Drop-off Point</th><th>What Happens</th><th>Severity</th><th>Fix</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hero CTA click</td><td>Opens WhatsApp catalog — no structured buy flow</td><td>🔴 Critical</td><td>Build native product pages + cart</td></tr>
+        <tr><td>"Add to Cart" click</td><td>Goes to old Wix site — brand break, friction spike</td><td>🔴 Critical</td><td>Unified checkout on same domain</td></tr>
+        <tr><td>First-time visitor</td><td>No skin quiz, no personalization hook — just browse</td><td>🟠 High</td><td>Skin quiz onboarding with routine output</td></tr>
+        <tr><td>Post-purchase</td><td>Zero follow-up. Refill cycle (30-45 days) ignored</td><td>🔴 Critical</td><td>WhatsApp refill automation</td></tr>
+        <tr><td>Mobile scroll</td><td>Trust bar is dense; product cards don't adapt CTA</td><td>🟡 Medium</td><td>Sticky mobile "Add to Routine" CTA</td></tr>
+        <tr><td>Footer newsletter</td><td>No incentive, no automation, no value exchange</td><td>🟡 Medium</td><td>Offer "Your Free Skin Routine Guide"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Audit Verdict</div>
+    <p>The site is solving for <strong>awareness</strong> when it needs to solve for <strong>retention</strong>. Every element communicates brand, but nothing captures behavior. The single biggest unlock: <strong>post-purchase WhatsApp automation + a routine layer</strong>. Build those two things first.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ STEP 2 ═══════════════════════════════ -->
+<div class="section" id="product">
+  <div class="sec-num">Step 02 · Product Layer</div>
+  <h2>The New <em>Product System</em></h2>
+  <p class="sec-intro">Four interlocking engines that turn one-time buyers into routine-driven repeat customers.</p>
+
+  <div class="sub">
+    <h3>Engine 1 — Routine Builder</h3>
+    <p>The core concept: every product on the site belongs to a <strong>step in a daily routine</strong>. The system helps users build their personal 2–4 step routine and then automates refills for that routine.</p>
+    <br>
+    <p><strong>How it works in the UI:</strong></p>
+    <ul class="styled">
+      <li>A <strong>"Build Your Routine" quiz</strong> (3–5 questions: skin type, concern, gender, preference) lives above the fold on mobile, in a persistent sidebar on desktop</li>
+      <li>Output: a personalized "Your Daily Ritual" stack — e.g., Marigold Mountain Soap (AM cleanse) + Café Vanilla Scrub (PM exfoliation) + Shea Moisture Cream (seal)</li>
+      <li>Each routine is <strong>saveable</strong> (via phone number / WhatsApp OTP — no email friction)</li>
+      <li>On product pages, show "<strong>Completes Your Routine</strong>" module — showing what the user is missing from their saved stack</li>
+      <li>Routine step labels added to product cards: "Step 1: Cleanse", "Step 3: Moisturise" — no redesign, just a small chip above the product name</li>
+    </ul>
+
+    <div class="callout" style="margin-top:22px">
+      <div class="callout-label">Design Rule</div>
+      <p>The Routine Builder must feel like a <strong>skincare consultation, not a product filter</strong>. Every question should be phrased in terms of the customer's life, not the product catalog. "How does your skin feel by 3pm?" not "Select skin type."</p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Engine 2 — Smart Reorder System</h3>
+    <p>Handmade soaps last ~30 days. Lip balms last ~45 days. Creams last ~60 days. These are predictable. Use them.</p>
+    <br>
+    <table>
+      <thead>
+        <tr><th>Product Category</th><th>Avg. Lifespan</th><th>Reorder Trigger (Days After Purchase)</th><th>Channel</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Handmade Soaps (90gm)</td><td>28–35 days</td><td>Day 22</td><td>WhatsApp</td></tr>
+        <tr><td>Lip Balms (5g)</td><td>40–50 days</td><td>Day 35</td><td>WhatsApp</td></tr>
+        <tr><td>Moisturising Creams</td><td>55–70 days</td><td>Day 45</td><td>WhatsApp + Email</td></tr>
+        <tr><td>Hair Care Oils</td><td>45–60 days</td><td>Day 38</td><td>WhatsApp</td></tr>
+        <tr><td>Scrubs</td><td>50–65 days</td><td>Day 42</td><td>WhatsApp</td></tr>
+      </tbody>
+    </table>
+    <br>
+    <p><strong>1-Click Reorder UX:</strong></p>
+    <ul class="styled">
+      <li>WhatsApp message arrives with product image, name, and a <strong>single reply "1" to reorder"</strong> — no login, no cart, no friction</li>
+      <li>Alternatively, a <strong>saved routine page</strong> (accessible via a short link sent post-purchase) has a single "Reorder My Routine" button</li>
+      <li>Pre-fill address from last order. One tap to confirm. Done.</li>
+      <li>Introduce <strong>"Subscribe & Save"</strong>: commit to a 3-month or 6-month cycle, get 10% off and free shipping. This converts reorder customers into subscribers.</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Engine 3 — Behavior Tracking Layer</h3>
+    <p>You don't need expensive analytics. You need <strong>intentional data collection</strong> at 5 key moments:</p>
+    <br>
+    <table>
+      <thead>
+        <tr><th>Event</th><th>Data Captured</th><th>What It Unlocks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Skin Quiz Completed</td><td>Skin type, concern, age range, gender</td><td>Personalized product recommendations for lifetime</td></tr>
+        <tr><td>Product Page Viewed (3+ sec)</td><td>Product ID, category, timestamp</td><td>Interest signals → WhatsApp follow-up nudge</td></tr>
+        <tr><td>Add to Cart / Add to Routine</td><td>Product, quantity, routine position</td><td>Routine completion data, upsell opportunity</td></tr>
+        <tr><td>Purchase Completed</td><td>Order, delivery date, phone number</td><td>Start refill countdown timer</td></tr>
+        <tr><td>WhatsApp Reply</td><td>"1" reorder / "PAUSE" / "SKIP"</td><td>Behavioral signal for churn prediction</td></tr>
+      </tbody>
+    </table>
+    <br>
+    <p>Store all of this in a simple <strong>Airtable or Supabase</strong> table keyed by phone number. This is your customer database. It replaces CRM for the early stage.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Engine 4 — Personalization Engine</h3>
+    <p>Personalization at Bighi Brothers doesn't need ML. It needs <strong>3 rules applied consistently</strong>:</p>
+    <ul class="styled">
+      <li><strong>Rule 1 — Skin Profile Match:</strong> If quiz says "oily skin + acne concern" → always surface Neem/Turmeric products first</li>
+      <li><strong>Rule 2 — Purchase History:</strong> If customer bought Soap only → show Scrub as "Complete your cleansing routine" in every touchpoint</li>
+      <li><strong>Rule 3 — Seasonal:</strong> In summer (Apr–Jun) → push Cooling/Mint variants. In winter (Nov–Feb) → push Rich Shea/Cocoa Butter products. This is a 2-line config change monthly.</li>
+    </ul>
+    <br>
+    <p>Upgrade path: Once you have 500+ orders, run a <strong>simple collaborative filter</strong> — "Customers who bought X also bought Y" — using Airtable formulas or a basic Python script on purchase history.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ STEP 3 ═══════════════════════════════ -->
+<div class="section" id="flows">
+  <div class="sec-num">Step 03 · UX Flow Redesign</div>
+  <h2>Redesigned <em>Key Flows</em></h2>
+  <p class="sec-intro">Same design language. New information architecture. Every flow has a job beyond the transaction.</p>
+
+  <div class="sub">
+    <h3>Flow 1 — Homepage</h3>
+    <p>Current job: showcase products. New job: <strong>entry into a personalized routine.</strong></p>
+    <br>
+    <p><strong>Revised section order:</strong></p>
+    <div class="flow" style="flex-direction:column; gap:8px;">
+      <div style="display:flex; gap:8px; flex-wrap:wrap; width:100%">
+        <div class="flow-step" style="flex:1">
+          <div class="fs-n">Section 1</div>
+          <div class="fs-t">Announcement Bar</div>
+          <div class="fs-d">Keep. Add: "Free refill reminder with every order"</div>
+        </div>
+        <div class="flow-step active" style="flex:1">
+          <div class="fs-n">Section 2 · NEW</div>
+          <div class="fs-t">Hero → Routine Entry</div>
+          <div class="fs-d">Add "What's your skin concern?" pill-selector directly in hero. 3 options max. Instantly filters product display below.</div>
+        </div>
+        <div class="flow-step" style="flex:1">
+          <div class="fs-n">Section 3</div>
+          <div class="fs-t">Trust Bar</div>
+          <div class="fs-d">Keep. Add: "30-day routine guarantee" as a new chip.</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; width:100%">
+        <div class="flow-step active" style="flex:1">
+          <div class="fs-n">Section 4 · NEW</div>
+          <div class="fs-t">Your Routine Stack</div>
+          <div class="fs-d">3-step visual: Cleanse → Treat → Moisturise. Tap each to see recommended product. This is the Routine Builder on-page.</div>
+        </div>
+        <div class="flow-step" style="flex:1">
+          <div class="fs-n">Section 5</div>
+          <div class="fs-t">Featured Product</div>
+          <div class="fs-d">Keep Marigold Mountain feature. Add "Add to Routine" secondary CTA alongside "Add to Cart".</div>
+        </div>
+        <div class="flow-step" style="flex:1">
+          <div class="fs-n">Section 6</div>
+          <div class="fs-t">Product Grid</div>
+          <div class="fs-d">Keep. Add routine step chip to each card. Add "part of 847 routines" social proof.</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; width:100%">
+        <div class="flow-step active" style="flex:1">
+          <div class="fs-n">Section 7 · NEW</div>
+          <div class="fs-t">Routine Results Wall</div>
+          <div class="fs-d">Customer UGC showing "My 30-day routine" with before/after notes (not photos). Text testimonials in current card style.</div>
+        </div>
+        <div class="flow-step" style="flex:1">
+          <div class="fs-n">Section 8</div>
+          <div class="fs-t">Ingredients / Process</div>
+          <div class="fs-d">Keep. This builds the "why" credibility needed for repeat purchase.</div>
+        </div>
+        <div class="flow-step active" style="flex:1">
+          <div class="fs-n">Section 9 · NEW</div>
+          <div class="fs-t">WhatsApp Community CTA</div>
+          <div class="fs-d">"Join 1,200 people on their skin journey" → WhatsApp broadcast opt-in. No email. Just a phone number and consent.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Flow 2 — Product Page</h3>
+    <p>Current: static product info. New job: <strong>earn trust, create urgency, anchor to routine.</strong></p>
+    <br>
+    <table>
+      <thead>
+        <tr><th>Element</th><th>Current State</th><th>New State</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Product Name</td><td>Name + category only</td><td>Name + Routine Step Label ("Step 1: Cleanse") + Skin Type Badge</td></tr>
+        <tr><td>Price</td><td>₹50 / MRP ₹80</td><td>Keep + add "Subscribe for ₹45/month, delivered every 30 days"</td></tr>
+        <tr><td>CTA</td><td>"Add to Cart"</td><td>Primary: "Add to Cart" · Secondary: "Add to My Routine" (saves to routine, not cart)</td></tr>
+        <tr><td>Urgency</td><td>None</td><td>"Batch #47 — 23 bars remaining" (update per actual stock)</td></tr>
+        <tr><td>Routine Module</td><td>None</td><td>"Completes Your Routine" — shows the 1-2 missing products from their saved stack</td></tr>
+        <tr><td>Social Proof</td><td>Star ratings (static)</td><td>Star ratings + "Part of 340 customer routines" + 2 recent review snippets</td></tr>
+        <tr><td>Ingredient Strip</td><td>None</td><td>Horizontal scrollable ingredient list with one-line benefit for each</td></tr>
+        <tr><td>Re-order Signal</td><td>None</td><td>"Lasts approx. 30 days. We'll remind you before you run out." with WhatsApp opt-in checkbox</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub">
+    <h3>Flow 3 — Checkout Redesign</h3>
+    <p>The Wix checkout is a brand-break. This must be resolved. Once native checkout exists:</p>
+    <ul class="styled">
+      <li><strong>Step 1 (Cart):</strong> Show routine completion upsell — "You're 1 product away from your full morning routine" — with a one-tap add</li>
+      <li><strong>Step 2 (Details):</strong> Collect phone number first (not email). This is the WhatsApp key. Make it the top field.</li>
+      <li><strong>Step 3 (Confirm):</strong> Show "Add refill reminder for this order? → Yes, remind me on WhatsApp in 25 days" — single checkbox, pre-checked</li>
+      <li><strong>Post-order page:</strong> "Your routine has been saved. Share it with a friend →" with a pre-written WhatsApp share link</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Flow 4 — Post-Purchase Journey (Critical)</h3>
+    <p>This is where the business is won or lost. Map of the 45-day post-purchase lifecycle:</p>
+    <br>
+    <div class="flow">
+      <div class="flow-step active">
+        <div class="fs-n">Day 0</div>
+        <div class="fs-t">Order Confirmed</div>
+        <div class="fs-d">WhatsApp: Order + tracking + "Your routine guide" PDF link</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="flow-step">
+        <div class="fs-n">Day 3</div>
+        <div class="fs-t">Delivery Check</div>
+        <div class="fs-d">WhatsApp: "Got your order? Reply YES ✓ or tell us if anything's wrong"</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="flow-step highlight">
+        <div class="fs-n">Day 7</div>
+        <div class="fs-t">Routine Onboarding</div>
+        <div class="fs-d">WhatsApp: "Your Week 1 skin tip" + how to use the soap correctly (glycerin layer tip)</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="flow-step">
+        <div class="fs-n">Day 14</div>
+        <div class="fs-t">Check-In</div>
+        <div class="fs-d">"How's your skin feeling? Reply 1 (Great) / 2 (Same) / 3 (Need help)"</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="flow-step active">
+        <div class="fs-n">Day 22</div>
+        <div class="fs-t">Refill Nudge</div>
+        <div class="fs-d">"Your soap is ~1 week away from finishing. Reorder with 1 tap?"</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="flow-step highlight">
+        <div class="fs-n">Day 30</div>
+        <div class="fs-t">Routine Review</div>
+        <div class="fs-d">"You've completed Month 1. How's your skin? Leave a review →" + referral offer</div>
+      </div>
+    </div>
+    <br>
+    <p>This 6-touchpoint sequence, sent on WhatsApp, costs near-zero and can be automated entirely with Make.com + WhatsApp Business API. <strong>This single flow can 3x your repeat purchase rate.</strong></p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ STEP 4 ═══════════════════════════════ -->
+<div class="section" id="retention">
+  <div class="sec-num">Step 04 · Retention OS</div>
+  <h2>The <em>Retention System</em></h2>
+  <p class="sec-intro">WhatsApp is the highest-engagement channel in India. Build the retention system entirely on it first.</p>
+
+  <div class="sub">
+    <h3>WhatsApp Message Templates</h3>
+    <p>These must be pre-approved as Business API templates. Write them now.</p>
+    <br>
+
+    <div class="wa-flow">
+      <div class="wa-label">💬 Refill Reminder — Day 22</div>
+      <div class="wa-msg">
+        Hi [Name] 🌿<br><br>
+        Your <b>Marigold Mountain Soap</b> is almost done — about 6–8 days left.<br><br>
+        Reply <b>1</b> to reorder ₹50 → same address<br>
+        Reply <b>2</b> to change address<br>
+        Reply <b>SKIP</b> to skip this month
+        <div class="wa-time">10:31 AM ✓✓</div>
+      </div>
+      <div class="wa-msg sent">
+        1
+        <div class="wa-time">10:33 AM ✓✓</div>
+      </div>
+      <div class="wa-msg">
+        ✅ Done! Reordering 1× Marigold Mountain.<br><br>
+        Delivery in 3–5 days.<br>
+        Order ID: #BB-1243<br><br>
+        <i>Thank you for staying consistent with your routine 🌿</i>
+        <div class="wa-time">10:33 AM ✓✓</div>
+      </div>
+    </div>
+
+    <br>
+    <div class="wa-flow">
+      <div class="wa-label">💬 Day 7 Routine Tip</div>
+      <div class="wa-msg">
+        Hey [Name]! Your Week 1 skin tip from Bighi Brothers 🌿<br><br>
+        <b>Did you know?</b> Your handmade soap forms a glycerin layer while drying. Always keep it on a dry soap dish — it'll last 30+ days instead of 18.<br><br>
+        Your next tip arrives in 7 days. Enjoy your ritual ✨
+        <div class="wa-time">9:00 AM ✓✓</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Routine Adherence Tracking</h3>
+    <p>Simple, not complex. Track 3 signals only:</p>
+    <ul class="styled">
+      <li><strong>Signal 1 — Reorder rate:</strong> Did they reorder within 40 days of last purchase? Yes = "Active." No = "At-risk."</li>
+      <li><strong>Signal 2 — WhatsApp engagement:</strong> Did they reply to the Day 14 check-in? Engaged = healthy. Silent = send win-back.</li>
+      <li><strong>Signal 3 — Routine completion:</strong> Do they own all 3 routine steps? If only 1 product, they're "Incomplete Routine" — a massive upsell opportunity.</li>
+    </ul>
+    <br>
+    <p>A simple <strong>Airtable dashboard</strong> with these 3 columns gives you a full retention picture for every customer. Color-code: Green (reordered), Yellow (due), Red (churned).</p>
+  </div>
+
+  <div class="sub">
+    <h3>Subscription / Auto-Delivery System</h3>
+    <table>
+      <thead>
+        <tr><th>Tier</th><th>Offer</th><th>Price</th><th>Target Customer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>One-Time</td><td>Standard order, standard price</td><td>₹50/product</td><td>New / trial</td></tr>
+        <tr><td>Refill Reminder</td><td>Same price, WhatsApp reminder + 1-tap reorder</td><td>₹50/product</td><td>Repeat buyers</td></tr>
+        <tr><td>Subscribe & Save</td><td>Auto-delivery every 30 days, 10% off, free shipping</td><td>₹45/product</td><td>Routine-committed</td></tr>
+        <tr><td>Routine Bundle</td><td>Full 3-step routine, monthly auto-delivery, 15% off</td><td>₹128/set</td><td>Power users</td></tr>
+      </tbody>
+    </table>
+    <br>
+    <p>Start with the "Refill Reminder" tier — it requires zero technology change, just WhatsApp. Introduce "Subscribe & Save" once you have 50+ refill customers.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ STEP 5 ═══════════════════════════════ -->
+<div class="section" id="priority">
+  <div class="sec-num">Step 05 · Prioritization</div>
+  <h2>Feature <em>Roadmap</em></h2>
+  <p class="sec-intro">Sequence by impact-to-effort ratio. Build the refill loop first — it costs near-zero and returns immediately.</p>
+
+  <div class="priority-grid">
+    <div class="priority-col">
+      <div class="priority-col-head mvp">🟢 MVP — 7 to 14 Days</div>
+      <div class="priority-item"><span class="pi-dot mvp"></span><span><strong>WhatsApp refill sequence.</strong> 6 automated messages post-purchase. Build in Make.com + WhatsApp Business API.</span></div>
+      <div class="priority-item"><span class="pi-dot mvp"></span><span><strong>Phone number capture at checkout.</strong> Mandatory field. This unlocks the entire retention system.</span></div>
+      <div class="priority-item"><span class="pi-dot mvp"></span><span><strong>Routine step labels on product cards.</strong> A small HTML chip above each product name. Zero design change.</span></div>
+      <div class="priority-item"><span class="pi-dot mvp"></span><span><strong>Skin quiz landing page.</strong> 5 questions, 3 product recommendations, save via WhatsApp number.</span></div>
+      <div class="priority-item"><span class="pi-dot mvp"></span><span><strong>Native checkout unification.</strong> Move checkout from Wix to the same domain. Use Razorpay + a simple order form if needed.</span></div>
+      <div class="priority-item"><span class="pi-dot mvp"></span><span><strong>Post-purchase page redesign.</strong> Add routine save, WhatsApp opt-in, and referral share link.</span></div>
+      <div class="priority-item"><span class="pi-dot mvp"></span><span><strong>Airtable customer database.</strong> Phone, products owned, last order date, routine completion status.</span></div>
+    </div>
+    <div class="priority-col">
+      <div class="priority-col-head adv">🟠 Advanced — 30 to 60 Days</div>
+      <div class="priority-item"><span class="pi-dot adv"></span><span><strong>Routine Builder UI module.</strong> On-page interactive component embedded in homepage. No redirect needed.</span></div>
+      <div class="priority-item"><span class="pi-dot adv"></span><span><strong>"Completes Your Routine" module on product pages.</strong> Cross-sell driven by saved routine data.</span></div>
+      <div class="priority-item"><span class="pi-dot adv"></span><span><strong>Subscribe & Save checkout option.</strong> Razorpay recurring payments or manual WhatsApp-confirmed subscription.</span></div>
+      <div class="priority-item"><span class="pi-dot adv"></span><span><strong>Urgency layer.</strong> Real-time batch stock counter on product pages + "Low stock" badge system.</span></div>
+      <div class="priority-item"><span class="pi-dot adv"></span><span><strong>Routine Results Wall.</strong> Curated customer testimonials in "my routine" format. Text-based, no photos needed.</span></div>
+      <div class="priority-item"><span class="pi-dot adv"></span><span><strong>Seasonal product rotation.</strong> Config-based: swap homepage featured products by season. 1 admin panel change.</span></div>
+    </div>
+    <div class="priority-col">
+      <div class="priority-col-head game">✦ Game-Changing — 90+ Days</div>
+      <div class="priority-item"><span class="pi-dot game"></span><span><strong>Routine Journal.</strong> Customers track their 30-day skin journey via WhatsApp prompts. Creates deep habit loop + content.</span></div>
+      <div class="priority-item"><span class="pi-dot game"></span><span><strong>Referral engine.</strong> Every customer gets a unique WhatsApp share link. ₹20 credit for referrer + ₹20 off for new buyer.</span></div>
+      <div class="priority-item"><span class="pi-dot game"></span><span><strong>Ingredient sourcing transparency page.</strong> "Here's the farm our turmeric came from." Builds premium positioning + justifies price increase.</span></div>
+      <div class="priority-item"><span class="pi-dot game"></span><span><strong>Collaborative filter engine.</strong> "Customers with oily skin who bought Marigold also use…" Run on Airtable export + basic script.</span></div>
+      <div class="priority-item"><span class="pi-dot game"></span><span><strong>WhatsApp Community.</strong> Skincare habit group — 1 tip/day, customer replies. Builds brand belonging and reduces churn to near-zero.</span></div>
+      <div class="priority-item"><span class="pi-dot game"></span><span><strong>Ritual Kit Builder.</strong> Gift-a-routine feature. Design your own 3-product kit, name it, and send it. Premium gifting play.</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ STEP 6 ═══════════════════════════════ -->
+<div class="section" id="positioning">
+  <div class="sec-num">Step 06 · Positioning</div>
+  <h2>New Brand <em>Language</em></h2>
+  <p class="sec-intro">Every word should sell the transformation — the daily practice — not the product.</p>
+
+  <div class="sub">
+    <h3>Homepage Headline</h3>
+    <div class="ba-grid">
+      <div class="ba-box before">
+        <div class="ba-label">Current</div>
+        <div class="ba-text">"Natural Handmade Skincare — Crafted with Love in India"</div>
+      </div>
+      <div class="ba-box after">
+        <div class="ba-label">New</div>
+        <div class="ba-text">"Build a Skincare Ritual.<br>Feel the Difference in 30 Days."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Hero Sub-headline</h3>
+    <div class="ba-grid">
+      <div class="ba-box before">
+        <div class="ba-label">Current</div>
+        <div class="ba-text">"100% natural, handcrafted soaps and cosmetics from India's purest ingredients"</div>
+      </div>
+      <div class="ba-box after">
+        <div class="ba-label">New</div>
+        <div class="ba-text">"Handmade in small batches. Built for daily rituals. Free of everything that doesn't belong on your skin."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Product-Level Messaging Shifts</h3>
+    <table>
+      <thead>
+        <tr><th>Product</th><th>Old Message</th><th>New Message</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Marigold Mountain Soap</td><td>"Acne Relief, Anti-Pigmentation soap"</td><td>"Your morning cleanse — clears, brightens, and sets your skin tone for the day."</td></tr>
+        <tr><td>Café Vanilla Scrub</td><td>"Exfoliating coffee & vanilla soap"</td><td>"Your 3x-a-week ritual. Resurfaces. Wakes up your skin. Smells like calm."</td></tr>
+        <tr><td>Lip Balm</td><td>"Peach + Cocoa Butter Lip Balm"</td><td>"The last step in your routine. Seal softness in — all day."</td></tr>
+        <tr><td>Moisturising Cream</td><td>"Nourishing cream"</td><td>"Lock in your cleanse. Your skin's nightly repair partner."</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub">
+    <h3>New Brand Positioning Statement</h3>
+    <div class="callout">
+      <div class="callout-label">Brand Positioning</div>
+      <p><strong>Bighi Brothers</strong> is not a skincare brand. It is a <strong>daily ritual company</strong>. Every product is a step in a practice — handmade, honest, and designed to compound over time. We don't sell soaps. We help you build the kind of skincare habit that becomes the best part of your morning.</p>
+      <br>
+      <p>Tagline: <strong>"A ritual, not a routine."</strong></p>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>CTA Language Audit</h3>
+    <table>
+      <thead>
+        <tr><th>Location</th><th>Current CTA</th><th>New CTA</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hero Primary</td><td>"Shop Now"</td><td>"Build My Ritual"</td></tr>
+        <tr><td>Hero Secondary</td><td>"Explore Collections"</td><td>"See What's In My Routine →"</td></tr>
+        <tr><td>Product Card</td><td>"Add to Cart +"</td><td>"Add to Routine" (primary) / "Buy Now" (secondary)</td></tr>
+        <tr><td>Newsletter Footer</td><td>"Join"</td><td>"Get My Free Routine Guide"</td></tr>
+        <tr><td>WhatsApp Float</td><td>💬 (generic icon)</td><td>"💬 Start Your Ritual"</td></tr>
+        <tr><td>Post-purchase page</td><td>[None]</td><td>"Your ritual has been saved. Share it →"</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ STEP 7 ═══════════════════════════════ -->
+<div class="section" id="ui">
+  <div class="sec-num">Step 07 · UI Enhancements</div>
+  <h2>Subtle <em>UI Upgrades</em></h2>
+  <p class="sec-intro">No redesign. Surgical additions that increase conversion within the existing visual language.</p>
+
+  <div class="sub">
+    <h3>Micro-Interactions to Add</h3>
+    <div class="cards">
+      <div class="card amber">
+        <div class="card-icon">✨</div>
+        <h4>Add to Routine Pulse</h4>
+        <p>When a user adds a product to their routine, show a brief radial pulse animation (amber glow) from the button. 300ms. Signals "saved to your system."</p>
+      </div>
+      <div class="card amber">
+        <div class="card-icon">✨</div>
+        <h4>Routine Progress Bar</h4>
+        <p>Persistent thin amber progress bar in the nav: "Your routine: Step 1 of 3 complete." Tapping it opens the routine drawer.</p>
+      </div>
+      <div class="card amber">
+        <div class="card-icon">✨</div>
+        <h4>Ingredient Reveal</h4>
+        <p>On product page, ingredient chips expand on tap to show a one-line benefit (e.g., "Turmeric → reduces inflammation, evens tone"). CSS accordion. No page load.</p>
+      </div>
+      <div class="card amber">
+        <div class="card-icon">✨</div>
+        <h4>Stock Urgency Flicker</h4>
+        <p>When stock drops below 30, the "23 remaining" badge does a single subtle fade-in on load. Not animated persistently — just once, on arrival.</p>
+      </div>
+      <div class="card amber">
+        <div class="card-icon">✨</div>
+        <h4>WhatsApp Float Upgrade</h4>
+        <p>Replace the plain emoji float with a forest-green pill: "💬 Start Your Ritual" — wider, with a subtle bounce after 8s on page. Drives 40–60% more taps.</p>
+      </div>
+      <div class="card amber">
+        <div class="card-icon">✨</div>
+        <h4>Scroll-Triggered Routine CTA</h4>
+        <p>After user scrolls past 60% of homepage, a sticky bottom bar appears: "Your routine is waiting — 3 products, ₹148/month." Dismiss button available.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Sections to Add</h3>
+    <ul class="styled">
+      <li><strong>Routine Stack Section:</strong> 3-column visual — Cleanse / Treat / Protect — each with a featured product. Replaces or precedes the product grid. Keep forest/cream palette, use existing card style.</li>
+      <li><strong>The 30-Day Promise Block:</strong> One sentence, centered, in large Playfair italic: <em>"Use it every day for 30 days — or we'll refund it."</em> This single block removes the primary purchase objection.</li>
+      <li><strong>Ingredient Origin Strip:</strong> A horizontal scrollable strip of key ingredients (Turmeric · Neem · Shea · Calendula · Rosehip) with source region. Forest background, amber text. 3 lines of CSS to add.</li>
+      <li><strong>WhatsApp Community CTA:</strong> A simple block in cream/forest: "Join 1,200 people building better skin habits. We send 1 tip a week. No spam. Ever." → Button: "Join on WhatsApp"</li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Sections to Remove or Reduce</h3>
+    <ul class="styled">
+      <li><strong>Generic social links in footer (emojis):</strong> Replace with proper branded icons — the emoji 📸 💬 🌐 feel off-brand given the premium typography.</li>
+      <li><strong>Excessive footer link repetition:</strong> Footer has Company + Products columns. Consolidate. Fewer links = more focus on the WhatsApp + Newsletter CTAs.</li>
+      <li><strong>Static hero without interactivity:</strong> The hero is beautiful but passive. Add the 3-pill skin concern selector (Oily · Dry · Sensitive) directly below the hero subtitle. It takes 15 lines of JS.</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ STEP 8 ═══════════════════════════════ -->
+<div class="section" id="tech">
+  <div class="sec-num">Step 08 · Tech &amp; Implementation</div>
+  <h2>The <em>Tech Architecture</em></h2>
+  <p class="sec-intro">No over-engineering. Every tool chosen for speed of implementation and cost-efficiency at the early stage.</p>
+
+  <div class="sub">
+    <h3>System Architecture</h3>
+    <div class="arch"><span class="arch-comment">// Bighi Brothers — D2C System Architecture (MVP)</span>
+
+<span class="arch-label">FRONTEND LAYER</span>
+<span class="arch-box">┌─────────────────────────────────────────────────────────────┐
+│  GitHub Pages (current)                                     │
+│  + Routine Builder Widget (vanilla JS, embedded)            │
+│  + Skin Quiz Page (standalone HTML)                         │
+│  + Razorpay checkout embed (JS widget)                      │
+└──────────────────────────┬──────────────────────────────────┘</span>
+                           <span class="arch-arrow">│</span>
+<span class="arch-label">ORDER + CUSTOMER DATA</span>
+<span class="arch-box">┌──────────────────────────▼──────────────────────────────────┐
+│  Razorpay API (payments + webhooks)                         │
+│  → Order webhook → Make.com scenario                        │
+│                                                             │
+│  Airtable (customer database)                               │
+│  Table: customers {phone, name, products[], order_date,     │
+│         routine_step, last_order, reorder_due, status}      │
+└──────────────────────────┬──────────────────────────────────┘</span>
+                           <span class="arch-arrow">│</span>
+<span class="arch-label">AUTOMATION LAYER</span>
+<span class="arch-box">┌──────────────────────────▼──────────────────────────────────┐
+│  Make.com (automation)                                      │
+│  Scenario 1: New Order → Create Airtable row               │
+│              → Send WA "Order confirmed + routine guide"    │
+│  Scenario 2: Daily cron → Check reorder_due = today        │
+│              → Send WA "Your soap is about to finish"       │
+│  Scenario 3: Day 14 → Send WA "How's your skin?"           │
+│  Scenario 4: WA reply "1" → Create new order in Razorpay   │
+└──────────────────────────┬──────────────────────────────────┘</span>
+                           <span class="arch-arrow">│</span>
+<span class="arch-label">WHATSAPP CHANNEL</span>
+<span class="arch-box">┌──────────────────────────▼──────────────────────────────────┐
+│  WhatsApp Business API (via Interakt / Wati / 360dialog)   │
+│  → Template messages (pre-approved)                         │
+│  → Inbound reply handling ("1", "SKIP", "PAUSE")           │
+│  → Broadcast lists for seasonal campaigns                   │
+└─────────────────────────────────────────────────────────────┘</span></div>
+  </div>
+
+  <div class="sub">
+    <h3>Tool Stack</h3>
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>Tool</th><th>Cost</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Payments</td><td>Razorpay</td><td>2% per transaction</td><td>Best India coverage, UPI + cards, easy embed</td></tr>
+        <tr><td>Customer DB</td><td>Airtable</td><td>Free → ₹1,800/mo</td><td>No-code, visual, team-shareable, easy automation triggers</td></tr>
+        <tr><td>Automation</td><td>Make.com</td><td>~₹800/mo</td><td>Connects Razorpay + Airtable + WhatsApp in visual flows</td></tr>
+        <tr><td>WhatsApp API</td><td>Interakt (India)</td><td>₹999/mo base</td><td>Indian-focused, good template approval, Hindi support</td></tr>
+        <tr><td>Skin Quiz</td><td>Typeform OR custom HTML</td><td>Free</td><td>Custom HTML keeps brand style; Typeform is faster to ship</td></tr>
+        <tr><td>Email (backup)</td><td>Brevo (Sendinblue)</td><td>Free tier</td><td>Transactional emails + newsletter. Backup to WhatsApp.</td></tr>
+        <tr><td>Analytics</td><td>Plausible.io</td><td>~₹700/mo</td><td>Privacy-first, lightweight, shows real drop-off data</td></tr>
+        <tr><td>Hosting</td><td>GitHub Pages (current)</td><td>Free</td><td>Keep it. Add Cloudflare in front for speed + security.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub">
+    <h3>Implementation Sequence (14 Days)</h3>
+    <table>
+      <thead>
+        <tr><th>Day</th><th>Task</th><th>Owner</th><th>Tool</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Day 1–2</td><td>Set up Razorpay account + embed checkout widget on product pages</td><td>Dev</td><td>Razorpay JS</td></tr>
+        <tr><td>Day 2–3</td><td>Create Airtable customers table + connect to Razorpay webhook via Make</td><td>No-code</td><td>Make.com</td></tr>
+        <tr><td>Day 3–4</td><td>Apply for WhatsApp Business API via Interakt. Submit 6 message templates.</td><td>Founder</td><td>Interakt</td></tr>
+        <tr><td>Day 4–5</td><td>Build Make.com Scenario 1: Order confirmed → Airtable row + WA message</td><td>No-code</td><td>Make.com</td></tr>
+        <tr><td>Day 5–6</td><td>Build Make.com Scenario 2: Daily cron for refill nudges (Day 22 trigger)</td><td>No-code</td><td>Make.com</td></tr>
+        <tr><td>Day 6–7</td><td>Add routine step labels to product cards (HTML chip, 10 min of CSS)</td><td>Dev</td><td>HTML/CSS</td></tr>
+        <tr><td>Day 7–8</td><td>Add "Reorder reminder" WhatsApp opt-in checkbox to checkout + post-order page</td><td>Dev</td><td>HTML/JS</td></tr>
+        <tr><td>Day 8–10</td><td>Build 5-question skin quiz page (custom HTML or Typeform)</td><td>Dev / No-code</td><td>HTML or Typeform</td></tr>
+        <tr><td>Day 10–12</td><td>Add scroll-triggered routine CTA bar to homepage (JS, 20 lines)</td><td>Dev</td><td>Vanilla JS</td></tr>
+        <tr><td>Day 12–14</td><td>Upgrade WhatsApp float to branded pill button. Test full post-purchase flow.</td><td>Dev</td><td>CSS/JS</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Cost to Build This MVP</div>
+    <p>Total monthly running cost at launch: <strong>~₹3,500–4,500/month</strong> (Interakt ₹999 + Make.com ₹800 + Airtable free tier + Plausible ₹700 + misc). <strong>This is recoverable with 7–9 refill orders.</strong> With 1,000 existing customers, the refill automation alone should generate 150–300 repeat orders in month 1 — ROI is immediate.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Security & Compliance</h3>
+    <div class="tech-card">
+      <h4>Essential Security Measures</h4>
+      <ul>
+        <li>Enable SSL/TLS on all pages (GitHub Pages + Cloudflare provides this)</li>
+        <li>Never store raw payment data — Razorpay handles PCI compliance</li>
+        <li>Encrypt customer phone numbers in Airtable using field-level encryption</li>
+        <li>Implement rate limiting on WhatsApp API to prevent abuse</li>
+        <li>Add reCAPTCHA to checkout forms to prevent bot submissions</li>
+        <li>Regular security audits: monthly dependency check via npm audit</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h4>Privacy Compliance (India)</h4>
+      <ul>
+        <li>Add privacy policy page with data collection disclosures</li>
+        <li>Implement explicit WhatsApp consent checkbox (pre-checked, with opt-out)</li>
+        <li>Add "Request my data" functionality in WhatsApp bot</li>
+        <li>Set data retention policy: customer data deleted after 3 years of inactivity</li>
+        <li>Document data processing agreements with Interakt and Make.com</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Performance Optimization</h3>
+    <div class="tech-card">
+      <h4>Frontend Performance Targets</h4>
+      <ul>
+        <li>Largest Contentful Paint (LCP): &lt; 2.5 seconds</li>
+        <li>First Input Delay (FID): &lt; 100ms</li>
+        <li>Cumulative Layout Shift (CLS): &lt; 0.1</li>
+        <li>Total page weight: &lt; 500KB (excluding images)</li>
+        <li>Image optimization: WebP format with JPEG fallback, lazy loading below fold</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h4>CDN & Hosting Enhancements</h4>
+      <ul>
+        <li>Add Cloudflare in front of GitHub Pages (free tier) for:
+          <ul style="margin-left: 16px; margin-top: 8px;">
+            <li>DDoS protection</li>
+            <li>Automatic GZIP/BROTLI compression</li>
+            <li>Edge caching for static assets</li>
+            <li>Free SSL certificates</li>
+          </ul>
+        </li>
+        <li>Migrate images to Cloudflare Images or similar CDN</li>
+        <li>Implement service worker for repeat visitor caching</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Monitoring & Analytics Stack</h3>
+    <div class="tech-card">
+      <h4>Recommended Monitoring Tools</h4>
+      <ul>
+        <li><strong>Plausible Analytics</strong> (₹700/mo): Privacy-first, GDPR compliant, real-time dashboard</li>
+        <li><strong>UptimeRobot</strong> (Free): Monitor site availability, alert on downtime</li>
+        <li><strong>Make.com Error Logging</strong>: Built-in error handling for automation scenarios</li>
+        <li><strong>Razorpay Dashboard</strong>: Transaction monitoring, fraud alerts, settlement reports</li>
+        <li><strong>WhatsApp Business Analytics</strong>: Message delivery, read receipts, response rates</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h4>Key Events to Track</h4>
+      <ul>
+        <li>Product page views (by product ID)</li>
+        <li>Add to cart / Add to routine events</li>
+        <li>Checkout initiation and completion</li>
+        <li>Quiz start and completion</li>
+        <li>WhatsApp message received and replied</li>
+        <li>Refill automation triggered and converted</li>
+        <li>Subscription upgrades and cancellations</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Development Workflow</h3>
+    <div class="tech-card">
+      <h4>Version Control & Deployment</h4>
+      <ul>
+        <li>GitHub repository for all website code</li>
+        <li>Branch strategy: main (production), develop (staging), feature/* branches</li>
+        <li>GitHub Actions for automated testing and deployment</li>
+        <li>Staging environment: bighibroters-preview.netlify.app (or similar)</li>
+        <li>Production deployment: automatic on merge to main branch</li>
+        <li>Feature flags: Use URL parameters for A/B testing (e.g., ?variant=b)</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h4>Code Quality Standards</h4>
+      <ul>
+        <li>ESLint for JavaScript linting with airbnb-base config</li>
+        <li>Prettier for consistent code formatting</li>
+        <li>HTMLHint for template validation</li>
+        <li>WCAG 2.1 AA compliance for accessibility</li>
+        <li>Cross-browser testing: Chrome, Firefox, Safari, Edge (last 2 versions)</li>
+        <li>Mobile testing: iOS Safari, Chrome Android (real devices preferred)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Backup & Disaster Recovery</h3>
+    <div class="tech-card">
+      <h4>Backup Strategy</h4>
+      <ul>
+        <li>Airtable: Daily automated backup to Google Drive</li>
+        <li>Razorpay: Transaction data retained for 7 years (regulatory requirement)</li>
+        <li>WhatsApp messages: Make.com stores scenario run history for 30 days</li>
+        <li>GitHub: Full code repository history with branch protection</li>
+        <li>Local backup: Monthly export of customer data to encrypted ZIP</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h4>Disaster Recovery Plan</h4>
+      <ul>
+        <li>Recovery Time Objective (RTO): 4 hours — site re-deployable via GitHub Actions</li>
+        <li>Recovery Point Objective (RPO): 24 hours — Airtable daily backup</li>
+        <li>Single point of failure: WhatsApp API — maintain Interakt account with backup operator</li>
+        <li>Payment processing: Razorpay fallback to UPI direct (manual)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ STEP 9 ═══════════════════════════════ -->
+<div class="section" id="admin">
+  <div class="sec-num">Step 09 · Admin Panel</div>
+  <h2>The Complete <em>Shopkeeper Dashboard</em></h2>
+  <p class="sec-intro">A comprehensive back-office system that enables the shopkeeper to manage inventory, orders, customers, payments, and content — all from one unified interface. No external tools required after setup.</p>
+
+  <div class="callout">
+    <div class="callout-label">Core Principle</div>
+    <p>The admin panel is <strong>not an afterthought</strong>. It is the operational backbone that makes the D2C transformation sustainable. Every feature on the storefront must have a corresponding management capability in the admin.</p>
+  </div>
+
+  <!-- ── ADMIN DASHBOARD ── -->
+  <div class="sub">
+    <h3>1. Admin Dashboard — The Command Center</h3>
+    <p>A single-screen overview of the entire business, updated in real-time.</p>
+    <div class="admin-mockup">
+      <h5>Dashboard Preview</h5>
+      <div class="admin-grid">
+        <div class="admin-stat">
+          <div class="stat-value">₹47,250</div>
+          <div class="stat-label">Today's Revenue</div>
+          <div class="stat-change up">↑ 12% vs yesterday</div>
+        </div>
+        <div class="admin-stat">
+          <div class="stat-value">23</div>
+          <div class="stat-label">New Orders</div>
+          <div class="stat-change up">↑ 8 vs yesterday</div>
+        </div>
+        <div class="admin-stat">
+          <div class="stat-value">7</div>
+          <div class="stat-label">Pending Fulfillment</div>
+          <div class="stat-change down">⚠ Requires action</div>
+        </div>
+        <div class="admin-stat">
+          <div class="stat-value">156</div>
+          <div class="stat-label">Active Customers</div>
+          <div class="stat-change up">↑ 12 this week</div>
+        </div>
+      </div>
+      <div class="admin-tabs">
+        <button class="admin-tab active">Today's Orders</button>
+        <button class="admin-tab">Low Stock Alert</button>
+        <button class="admin-tab">Recent Customers</button>
+        <button class="admin-tab">Payment Summary</button>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Order #</th><th>Customer</th><th>Items</th><th>Amount</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>#2847</td><td>Priya Sharma</td><td>3 items</td><td>₹1,240</td><td><span class="status-badge pending">Payment Pending</span></td><td>View</td></tr>
+          <tr><td>#2846</td><td>Rajesh Kumar</td><td>2 items</td><td>₹680</td><td><span class="status-badge processing">Processing</span></td><td>View</td></tr>
+          <tr><td>#2845</td><td>Anita Patel</td><td>1 item</td><td>₹350</td><td><span class="status-badge shipped">Shipped</span></td><td>Track</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="feature-list">
+      <h5>Dashboard Features</h5>
+      <ul>
+        <li>Real-time revenue tracking with comparison to yesterday/last week</li>
+        <li>Order status summary (pending, processing, shipped, delivered)</li>
+        <li>Inventory alerts (low stock, out of stock, expiring batches)</li>
+        <li>Customer activity feed (new signups, repeat purchases, reviews)</li>
+        <li>WhatsApp message queue status (pending sends, failed deliveries)</li>
+        <li>Quick action buttons (mark order shipped, restock product, reply to customer)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── INVENTORY MANAGEMENT ── -->
+  <div class="sub">
+    <h3>2. Inventory Management System</h3>
+    <p>Complete control over products, stock levels, batches, and variants. Designed for handmade, small-batch operations.</p>
+    
+    <div class="admin-mockup">
+      <h5>Product Management Interface</h5>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Product</th><th>Batch #</th><th>Stock</th><th>Status</th><th>Reorder At</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Marigold Mountain Soap</strong><br><small>90g · ₹50</small></td>
+            <td>#47</td>
+            <td>23 units</td>
+            <td><span class="status-badge ok">Active</span></td>
+            <td>15 units</td>
+            <td>Edit · Duplicate · Archive</td>
+          </tr>
+          <tr>
+            <td><strong>Café Vanilla Scrub</strong><br><small>100g · ₹120</small></td>
+            <td>#46</td>
+            <td>8 units</td>
+            <td><span class="status-badge low">Low Stock</span></td>
+            <td>10 units</td>
+            <td>Edit · Restock · Archive</td>
+          </tr>
+          <tr>
+            <td><strong>Shea Moisture Cream</strong><br><small>50g · ₹180</small></td>
+            <td>#45</td>
+            <td>0 units</td>
+            <td><span class="status-badge cancelled">Out of Stock</span></td>
+            <td>—</td>
+            <td>Edit · Restock · Hide</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="feature-list">
+      <h5>Product Management Features</h5>
+      <ul>
+        <li><strong>Product Creation Wizard</strong>
+          <ul>
+            <li>Name, description, ingredients, benefits</li>
+            <li>Multiple images with drag-and-drop upload</li>
+            <li>SKU generation (auto or manual)</li>
+            <li>Category and routine step assignment (Cleanse / Treat / Moisturize)</li>
+            <li>Skin type compatibility tags (Oily / Dry / Sensitive / All)</li>
+          </ul>
+        </li>
+        <li><strong>Batch Tracking</strong>
+          <ul>
+            <li>Batch number auto-generation (Format: BB-YYYYMMDD-###)</li>
+            <li>Manufacturing date and "best before" tracking</li>
+            <li>Maker attribution (who made this batch)</li>
+            <li>Raw material source logging</li>
+          </ul>
+        </li>
+        <li><strong>Stock Management</strong>
+          <ul>
+            <li>Real-time inventory levels</li>
+            <li>Low stock alerts (configurable thresholds per product)</li>
+            <li>Stock adjustment history (who changed what, when)</li>
+            <li>Reserved stock tracking (orders pending payment)</li>
+          </ul>
+        </li>
+        <li><strong>Product Variants</strong>
+          <ul>
+            <li>Size variants (Mini 30g / Regular 90g / Family 250g)</li>
+            <li>Scent variants (Lavender / Rose / Unscented)</li>
+            <li>Independent pricing and stock per variant</li>
+          </ul>
+        </li>
+        <li><strong>Pricing & Promotions</strong>
+          <ul>
+            <li>MRP and selling price with automatic margin calculation</li>
+            <li>Scheduled discounts (start/end dates)</li>
+            <li>Bundle pricing ("Complete Routine" sets)</li>
+            <li>Subscriber-only pricing (10% off for members)</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── ORDER MANAGEMENT ── -->
+  <div class="sub">
+    <h3>3. Order Management System</h3>
+    <p>End-to-end order lifecycle management from placement to delivery.</p>
+
+    <div class="admin-mockup">
+      <h5>Order Details View</h5>
+      <div class="admin-tabs">
+        <button class="admin-tab active">Order Info</button>
+        <button class="admin-tab">Customer</button>
+        <button class="admin-tab">Payment</button>
+        <button class="admin-tab">Shipping</button>
+        <button class="admin-tab">Communication</button>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Item</th><th>Variant</th><th>Batch</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Marigold Mountain Soap</td><td>90g</td><td>#47</td><td>2</td><td>₹50</td><td>₹100</td></tr>
+          <tr><td>Café Vanilla Scrub</td><td>100g</td><td>#46</td><td>1</td><td>₹120</td><td>₹120</td></tr>
+          <tr><td colspan="5" style="text-align: right;"><strong>Subtotal:</strong></td><td>₹220</td></tr>
+          <tr><td colspan="5" style="text-align: right;">Shipping:</td><td>₹50</td></tr>
+          <tr><td colspan="5" style="text-align: right;"><strong>Total:</strong></td><td><strong>₹270</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="feature-list">
+      <h5>Order Management Features</h5>
+      <ul>
+        <li><strong>Order Lifecycle</strong>
+          <ul>
+            <li>Status: Pending → Payment Confirmed → Processing → Packed → Shipped → Delivered</li>
+            <li>Status change triggers automatic WhatsApp notification</li>
+            <li>Manual status override with notes (for edge cases)</li>
+            <li>Order cancellation with reason logging</li>
+          </ul>
+        </li>
+        <li><strong>Order Actions</strong>
+          <ul>
+            <li>Print packing slip (A4 / thermal printer)</li>
+            <li>Print shipping label (integrates with Shiprocket/Delhivery)</li>
+            <li>Mark as packed (deducts from inventory)</li>
+            <li>Add tracking number (auto-sends to customer)</li>
+            <li>Resend order confirmation</li>
+          </ul>
+        </li>
+        <li><strong>Bulk Operations</strong>
+          <ul>
+            <li>Select multiple orders → Mark all as shipped</li>
+            <li>Export orders to CSV (for accounting)</li>
+            <li>Print multiple packing slips at once</li>
+          </ul>
+        </li>
+        <li><strong>Returns & Refunds</strong>
+          <ul>
+            <li>Initiate return request</li>
+            <li>Track return status (pending pickup → received → inspected → refunded)</li>
+            <li>Razorpay refund integration (one-click from order)</li>
+            <li>Exchange management (swap for different product)</li>
+          </ul>
+        </li>
+        <li><strong>Order Filters & Search</strong>
+          <ul>
+            <li>Filter by: date range, status, payment method, customer</li>
+            <li>Search by: order number, customer phone, customer name</li>
+            <li>Save frequently used filters</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── CUSTOMER MANAGEMENT ── -->
+  <div class="sub">
+    <h3>4. Customer Management System</h3>
+    <p>360-degree view of every customer with complete purchase history and communication log.</p>
+
+    <div class="admin-mockup">
+      <h5>Customer Profile View</h5>
+      <div class="admin-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="admin-stat" style="text-align: left; background: var(--forest); color: var(--cream);">
+          <div style="font-size: 0.7rem; opacity: 0.7;">Priya Sharma</div>
+          <div style="font-size: 0.9rem; margin-top: 4px;">+91 98765 43210</div>
+          <div style="font-size: 0.65rem; margin-top: 8px; opacity: 0.6;">Customer since Jan 2026</div>
+        </div>
+        <div class="admin-stat" style="text-align: left;">
+          <div style="font-size: 0.7rem; color: var(--warm);">Total Orders</div>
+          <div style="font-size: 1.4rem; color: var(--forest); font-weight: 700;">8</div>
+          <div style="font-size: 0.65rem; color: var(--green);">VIP Customer</div>
+        </div>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Date</th><th>Order #</th><th>Items</th><th>Amount</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>28 Mar</td><td>#2847</td><td>3 items</td><td>₹1,240</td><td><span class="status-badge pending">Pending</span></td></tr>
+          <tr><td>15 Mar</td><td>#2789</td><td>2 items</td><td>₹680</td><td><span class="status-badge shipped">Delivered</span></td></tr>
+          <tr><td>28 Feb</td><td>#2654</td><td>4 items</td><td>₹1,520</td><td><span class="status-badge shipped">Delivered</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="feature-list">
+      <h5>Customer Management Features</h5>
+      <ul>
+        <li><strong>Customer Profile</strong>
+          <ul>
+            <li>Contact info (name, phone, email, WhatsApp opt-in status)</li>
+            <li>Multiple delivery addresses with default selection</li>
+            <li>Skin profile (from quiz): type, concerns, preferences</li>
+            <li>Saved routine (products in their personal stack)</li>
+            <li>Subscription status (active/paused/cancelled)</li>
+          </ul>
+        </li>
+        <li><strong>Purchase History</strong>
+          <ul>
+            <li>Complete order history with one-click reorder</li>
+            <li>Average order value and lifetime value calculation</li>
+            <li>Preferred products (most frequently purchased)</li>
+            <li>Refill cycle tracking (when are they due to reorder)</li>
+          </ul>
+        </li>
+        <li><strong>Communication Log</strong>
+          <ul>
+            <li>All WhatsApp messages sent/received</li>
+            <li>Email history (if enabled)</li>
+            <li>Manual notes (add context about preferences)</li>
+            <li>Quick-reply templates for common queries</li>
+          </ul>
+        </li>
+        <li><strong>Customer Segmentation</strong>
+          <ul>
+            <li>VIP Customers (5+ orders or ₹3000+ lifetime value)</li>
+            <li>At-Risk (hasn't ordered in 60+ days)</li>
+            <li>Subscribers (active monthly subscription)</li>
+            <li>One-Time Buyers (only 1 order)</li>
+            <li>Create custom segments with filters</li>
+          </ul>
+        </li>
+        <li><strong>Bulk Actions</strong>
+          <ul>
+            <li>Send WhatsApp broadcast to segment</li>
+            <li>Export customer list to CSV</li>
+            <li>Tag customers (for internal organization)</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── PAYMENT & FINANCE ── -->
+  <div class="sub">
+    <h3>5. Payment & Financial Management</h3>
+    <p>Track every rupee with automated reconciliation and reporting.</p>
+
+    <div class="admin-mockup">
+      <h5>Payment Summary</h5>
+      <div class="admin-grid">
+        <div class="admin-stat">
+          <div class="stat-value">₹2,47,500</div>
+          <div class="stat-label">This Month</div>
+          <div class="stat-change up">↑ 18% vs last month</div>
+        </div>
+        <div class="admin-stat">
+          <div class="stat-value">₹8,450</div>
+          <div class="stat-label">Pending Settlement</div>
+          <div class="stat-change neutral">From 12 orders</div>
+        </div>
+        <div class="admin-stat">
+          <div class="stat-value">₹2,250</div>
+          <div class="stat-label">Refunds</div>
+          <div class="stat-change down">↓ 3 this month</div>
+        </div>
+        <div class="admin-stat">
+          <div class="stat-value">98.2%</div>
+          <div class="stat-label">Success Rate</div>
+          <div class="stat-change up">↑ 2.1% vs last month</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-list">
+      <h5>Payment & Finance Features</h5>
+      <ul>
+        <li><strong>Payment Tracking</strong>
+          <ul>
+            <li>Real-time payment status from Razorpay</li>
+            <li>Payment method breakdown (UPI / Cards / Net Banking / Wallets)</li>
+            <li>Failed payment log with retry attempts</li>
+            <li>Cash on Delivery (COD) order flagging</li>
+          </ul>
+        </li>
+        <li><strong>Razorpay Integration</strong>
+          <ul>
+            <li>One-click refund processing</li>
+            <li>Settlement tracking (T+2 or T+3)</li>
+            <li>Dispute management (chargebacks)</li>
+            <li>Auto-reconciliation: match orders with bank settlements</li>
+          </ul>
+        </li>
+        <li><strong>Financial Reports</strong>
+          <ul>
+            <li>Daily sales summary (revenue, orders, average order value)</li>
+            <li>Monthly P&L (revenue - refunds - shipping costs)</li>
+            <li>Product performance report (best sellers, slow movers)</li>
+            <li>Payment gateway fees report</li>
+            <li>GST report (if applicable) with HSN codes</li>
+          </ul>
+        </li>
+        <li><strong>Export & Accounting</strong>
+          <ul>
+            <li>Export to Excel/CSV for Tally/Zoho Books</li>
+            <li>Auto-email daily summary to accountant</li>
+            <li>Invoice generation with GST (optional)</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── CONTENT MANAGEMENT ── -->
+  <div class="sub">
+    <h3>6. Content Management System (CMS)</h3>
+    <p>Update website content without touching code.</p>
+
+    <div class="feature-list">
+      <h5>CMS Features</h5>
+      <ul>
+        <li><strong>Homepage Editor</strong>
+          <ul>
+            <li>Edit announcement bar text and link</li>
+            <li>Upload/update hero banner image</li>
+            <li>Manage featured products (drag to reorder)</li>
+            <li>Edit trust bar icons and text</li>
+          </ul>
+        </li>
+        <li><strong>Banner Management</strong>
+          <ul>
+            <li>Schedule banner visibility (start/end dates)</li>
+            <li>Mobile and desktop image variants</li>
+            <li>Click tracking for each banner</li>
+          </ul>
+        </li>
+        <li><strong>Pages & Blog</strong>
+          <ul>
+            <li>Create/edit static pages (About, Shipping Policy, Returns)</li>
+            <li>Blog post editor with rich text formatting</li>
+            <li>SEO fields: meta title, description, Open Graph image</li>
+            <li>URL slug management</li>
+          </ul>
+        </li>
+        <li><strong>Reviews Management</strong>
+          <ul>
+            <li>Moderate customer reviews (approve/reject)</li>
+            <li>Feature selected reviews on product pages</li>
+            <li>Reply to reviews publicly</li>
+            <li>Export reviews for marketing use</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── WHATSAPP AUTOMATION ── -->
+  <div class="sub">
+    <h3>7. WhatsApp Automation Control Center</h3>
+    <p>Manage all customer communications from one place.</p>
+
+    <div class="feature-list">
+      <h5>WhatsApp Management Features</h5>
+      <ul>
+        <li><strong>Message Templates</strong>
+          <ul>
+            <li>View all approved WhatsApp templates</li>
+            <li>Edit template variables (order number, customer name)</li>
+            <li>Preview messages before sending</li>
+            <li>A/B test template variants</li>
+          </ul>
+        </li>
+        <li><strong>Automation Rules</strong>
+          <ul>
+            <li>Enable/disable each automation (order confirm, refill nudge, etc.)</li>
+            <li>Edit trigger timing (e.g., change refill nudge from Day 22 to Day 25)</li>
+            <li>View automation performance (send rate, open rate, click rate)</li>
+            <li>Add custom automation rules</li>
+          </ul>
+        </li>
+        <li><strong>Broadcast Messages</strong>
+          <ul>
+            <li>Send manual broadcasts to segments (VIP customers, At-Risk, etc.)</li>
+            <li>Schedule broadcasts for optimal timing</li>
+            <li>Track delivery and read receipts</li>
+            <li>Template selector with preview</li>
+          </ul>
+        </li>
+        <li><strong>Inbox</strong>
+          <ul>
+            <li>View all incoming WhatsApp messages</li>
+            <li>Reply directly from admin (syncs to WhatsApp Business)</li>
+            <li>Assign conversations to team members</li>
+            <li>Mark conversations as resolved</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── ANALYTICS & REPORTS ── -->
+  <div class="sub">
+    <h3>8. Analytics & Reporting Dashboard</h3>
+    <p>Data-driven insights to optimize the business.</p>
+
+    <div class="feature-list">
+      <h5>Reports Available</h5>
+      <ul>
+        <li><strong>Sales Analytics</strong>
+          <ul>
+            <li>Revenue trends (daily, weekly, monthly, yearly)</li>
+            <li>Order volume and average order value</li>
+            <li>Product category performance</li>
+            <li>Hour-of-day and day-of-week patterns</li>
+          </ul>
+        </li>
+        <li><strong>Customer Analytics</strong>
+          <ul>
+            <li>Customer acquisition rate</li>
+            <li>Repeat purchase rate and cohort analysis</li>
+            <li>Geographic distribution of customers</li>
+            <li>Skin type breakdown (from quiz data)</li>
+          </ul>
+        </li>
+        <li><strong>Product Analytics</strong>
+          <ul>
+            <li>Best sellers and slow movers</li>
+            <li>Product view-to-purchase conversion</li>
+            <li>Return rates by product</li>
+            <li>Inventory turnover rate</li>
+          </ul>
+        </li>
+        <li><strong>Marketing Analytics</strong>
+          <ul>
+            <li>WhatsApp campaign performance</li>
+            <li>Refill automation conversion rate</li>
+            <li>Quiz completion to purchase funnel</li>
+            <li>Subscription signup and churn rates</li>
+          </ul>
+        </li>
+        <li><strong>Scheduled Reports</strong>
+          <ul>
+            <li>Daily summary email at 9 AM</li>
+            <li>Weekly performance report (every Monday)</li>
+            <li>Monthly business review (auto-generated PDF)</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── ROLE-BASED ACCESS CONTROL ── -->
+  <div class="sub">
+    <h3>9. Role-Based Access Control (RBAC)</h3>
+    <p>Secure multi-user access with appropriate permissions.</p>
+
+    <div class="role-card">
+      <h5>Super Admin (Owner)</h5>
+      <div class="role-perms">
+        <span>Full Access</span>
+        <span>All Reports</span>
+        <span>Settings</span>
+        <span>User Management</span>
+        <span>Financial Data</span>
+        <span>Refunds</span>
+      </div>
+    </div>
+    <div class="role-card">
+      <h5>Manager</h5>
+      <div class="role-perms">
+        <span>View Orders</span>
+        <span>Process Orders</span>
+        <span>View Customers</span>
+        <span>Edit Products</span>
+        <span>View Reports</span>
+        <span>Send Broadcasts</span>
+      </div>
+    </div>
+    <div class="role-card">
+      <h5>Fulfillment Staff</h5>
+      <div class="role-perms">
+        <span>View Orders</span>
+        <span>Update Order Status</span>
+        <span>Print Packing Slips</span>
+        <span>Update Inventory</span>
+        <span>No Customer Data Export</span>
+      </div>
+    </div>
+    <div class="role-card">
+      <h5>Customer Support</h5>
+      <div class="role-perms">
+        <span>View Customer Profiles</span>
+        <span>Reply to WhatsApp Messages</span>
+        <span>View Order History</span>
+        <span>Initiate Returns</span>
+        <span>No Pricing/Financial Data</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TECHNICAL ARCHITECTURE ── -->
+  <div class="sub">
+    <h3>10. Admin Panel Technical Architecture</h3>
+    
+    <div class="feature-list">
+      <h5>Frontend Stack</h5>
+      <ul>
+        <li><strong>Framework:</strong> React.js or Vue.js (SPA for smooth experience)</li>
+        <li><strong>UI Library:</strong> Tailwind CSS (consistent with main site design)</li>
+        <li><strong>Charts:</strong> Chart.js or Recharts (for analytics visualization)</li>
+        <li><strong>Tables:</strong> React Table or TanStack Table (sorting, filtering, pagination)</li>
+        <li><strong>Rich Text:</strong> TipTap or Quill (for CMS editor)</li>
+      </ul>
+    </div>
+
+    <div class="feature-list">
+      <h5>Backend & Database</h5>
+      <ul>
+        <li><strong>API:</strong> Supabase or Firebase (serverless, real-time)</li>
+        <li><strong>Authentication:</strong> Supabase Auth with JWT tokens</li>
+        <li><strong>Database:</strong> PostgreSQL (via Supabase) — relational data for orders, customers</li>
+        <li><strong>Storage:</strong> Supabase Storage for product images and documents</li>
+        <li><strong>Real-time:</strong> Live order updates via WebSockets</li>
+      </ul>
+    </div>
+
+    <div class="feature-list">
+      <h5>Integrations</h5>
+      <ul>
+        <li><strong>Payments:</strong> Razorpay Dashboard API for refunds and settlements</li>
+        <li><strong>WhatsApp:</strong> Interakt API for message templates and broadcasts</li>
+        <li><strong>Shipping:</strong> Shiprocket / Delhivery API for label generation and tracking</li>
+        <li><strong>Email:</strong> Brevo API for transactional emails</li>
+        <li><strong>SMS:</strong> Twilio or Exotel (backup to WhatsApp)</li>
+      </ul>
+    </div>
+
+    <div class="callout" style="margin-top: 24px;">
+      <div class="callout-label">Implementation Timeline</div>
+      <p><strong>Phase 1 (Weeks 1-2):</strong> Dashboard, Order Management, Basic Inventory<br>
+      <strong>Phase 2 (Weeks 3-4):</strong> Customer Management, Payment Tracking<br>
+      <strong>Phase 3 (Weeks 5-6):</strong> WhatsApp Control Center, Analytics<br>
+      <strong>Phase 4 (Weeks 7-8):</strong> CMS, RBAC, Advanced Reporting<br><br>
+      <strong>Total Development Time:</strong> 8 weeks with 2 developers<br>
+      <strong>Monthly Operating Cost:</strong> ~₹5,000 (Supabase Pro ₹2,500 + other services)</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /doc -->
+
+<div class="doc-footer">
+  Bighi Brothers Industries Pvt. Ltd. · D2C Transformation Blueprint · v2.0.0 · March 2026<br>
+  Confidential · Prepared for internal use. Not for distribution.<br>
+  <span style="font-family: 'DM Mono', monospace; font-size: 0.65rem; color: rgba(245,239,224,0.4); margin-top: 6px; display: block;">
+    Last Updated: March 2026 · Next Review: June 2026 · Document Owner: Internal Strategy Team
+  </span>
+</div>
+
+</body>
+</html>

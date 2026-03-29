@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed — Bighi Brothers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5EFE0; --forest:#1C3A2E; --forest2:#162D24;
+  --amber:#C8831A; --amberl:#E8A830;
+  --offwhite:#FAF7F2; --charcoal:#2D2D2D; --warm:#8C8070;
+  --border:rgba(28,58,46,0.11);
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+  --green:#25D366;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:auto}
+body{font-family:'EB Garamond',serif;background:var(--forest2);color:var(--charcoal);overflow-x:hidden;cursor:none}
+
+#cur{position:fixed;width:10px;height:10px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9996;transform:translate(-50%,-50%)}
+#cur-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(200,131,26,0.5);border-radius:50%;pointer-events:none;z-index:9995;transform:translate(-50%,-50%);transition:width .5s var(--ease),height .5s var(--ease)}
+body.cursor-link #cur{width:14px;height:14px;background:var(--forest)}
+
+.success-wrap{
+  max-width:640px;margin:0 auto;padding:120px 32px 80px;text-align:center;
+  animation:fadeUp .8s var(--ease);
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.success-icon{
+  width:80px;height:80px;background:rgba(37,211,102,0.1);
+  border:1px solid rgba(37,211,102,0.3);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;font-size:2rem;animation:scaleIn .5s var(--ease) .2s both;
+}
+@keyframes scaleIn{
+  from{transform:scale(0)}
+  to{transform:scale(1)}
+}
+
+.success-title{
+  font-family:'Playfair Display',serif;font-size:2.2rem;font-style:italic;
+  color:var(--cream);margin-bottom:12px;line-height:1.2;
+}
+.success-sub{
+  font-size:0.95rem;color:rgba(245,239,224,0.5);margin-bottom:8px;line-height:1.6;
+}
+.order-id{
+  font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;
+  color:var(--amber);margin-bottom:36px;
+}
+
+/* TIMELINE */
+.timeline{
+  display:flex;justify-content:center;align-items:flex-start;
+  margin:40px 0;position:relative;
+}
+.timeline::before{
+  content:'';position:absolute;top:20px;left:15%;right:15%;height:1px;
+  background:rgba(245,239,224,0.1);
+}
+.tl-step{
+  flex:1;text-align:center;position:relative;z-index:1;
+}
+.tl-icon{
+  width:40px;height:40px;border-radius:50%;background:var(--forest);
+  border:1px solid rgba(245,239,224,0.1);margin:0 auto 10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;
+}
+.tl-step.done .tl-icon{background:var(--amber);border-color:var(--amber)}
+.tl-step.active .tl-icon{background:var(--green);border-color:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.3)}
+  50%{box-shadow:0 0 0 8px rgba(37,211,102,0)}
+}
+.tl-label{
+  font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:rgba(245,239,224,0.3);
+}
+.tl-step.done .tl-label,.tl-step.active .tl-label{color:rgba(245,239,224,0.6)}
+
+/* WHATSAPP BOX */
+.wa-box{
+  background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.15);
+  padding:24px;border-radius:2px;margin:32px 0;text-align:left;
+}
+.wa-box-title{
+  font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--cream);
+  margin-bottom:8px;display:flex;align-items:center;gap:10px;
+}
+.wa-box-title span{color:var(--green)}
+.wa-box-text{font-size:0.85rem;color:rgba(245,239,224,0.5);line-height:1.6;margin-bottom:16px}
+.wa-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green);color:white;border:none;
+  font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:12px 20px;border-radius:3px;cursor:pointer;text-decoration:none;transition:background .3s;
+}
+.wa-btn:hover{background:#128C7E}
+
+/* ROUTINE REMINDER */
+.routine-card{
+  background:rgba(245,239,224,0.03);border:1px solid rgba(245,239,224,0.08);
+  padding:20px;border-radius:2px;margin:24px 0;text-align:left;
+}
+.routine-card-title{
+  font-family:'Cormorant Garamond',serif;font-size:0.85rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:12px;
+}
+.routine-items{display:flex;flex-direction:column;gap:10px}
+.routine-item{display:flex;align-items:center;gap:12px}
+.routine-item-num{
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(245,239,224,0.06);border:1px solid rgba(245,239,224,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:0.55rem;color:var(--amber);
+}
+.routine-item-name{font-size:0.88rem;color:var(--cream);flex:1}
+.routine-item-time{font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(245,239,224,0.4)}
+
+/* ACTIONS */
+.success-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.btn-outline{
+  background:none;border:1px solid rgba(245,239,224,0.15);
+  color:rgba(245,239,224,0.6);padding:12px 24px;
+  font-family:'Cormorant Garamond',serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;transition:all .3s;
+}
+.btn-outline:hover{border-color:var(--amber);color:var(--amber)}
+.btn-primary{
+  background:var(--amber);border:1px solid var(--amber);
+  color:white;padding:12px 24px;
+  font-family:'Cormorant Garamond',serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;transition:all .3s;
+}
+.btn-primary:hover{background:var(--forest);border-color:var(--forest)}
+
+/* FOOTER */
+.success-footer{
+  margin-top:60px;padding-top:24px;
+  border-top:1px solid rgba(245,239,224,0.06);
+}
+.success-footer p{font-size:0.78rem;color:rgba(245,239,224,0.3);line-height:1.6}
+.success-footer a{color:var(--amber);text-decoration:none}
+
+/* REFSILL CTA */
+.refill-cta{
+  background:linear-gradient(135deg,rgba(200,131,26,0.08),rgba(200,131,26,0.03));
+  border:1px solid rgba(200,131,26,0.2);padding:20px;border-radius:2px;margin:24px 0;
+}
+.refill-cta-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--cream);margin-bottom:8px}
+.refill-cta-text{font-size:0.85rem;color:rgba(245,239,224,0.5);margin-bottom:14px}
+.refill-cta-input{display:flex;gap:8px}
+.refill-cta-input input{
+  flex:1;background:rgba(245,239,224,0.05);border:1px solid rgba(245,239,224,0.1);
+  padding:10px 14px;font-family:'EB Garamond',serif;font-size:0.88rem;color:var(--cream);
+  border-radius:1px;outline:none;
+}
+.refill-cta-input input:focus{border-color:var(--amber)}
+.refill-cta-input button{
+  background:var(--amber);border:none;color:white;
+  font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:10px 16px;border-radius:1px;cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<div class="success-wrap">
+  <div class="success-icon">✓</div>
+  
+  <h1 class="success-title">Order Confirmed</h1>
+  <p class="success-sub">Thank you for choosing Bighi Brothers.<br>Your ritual is on its way.</p>
+  <div class="order-id">Order #BB-2026-0342</div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="tl-step done">
+      <div class="tl-icon">✓</div>
+      <div class="tl-label">Confirmed</div>
+    </div>
+    <div class="tl-step active">
+      <div class="tl-icon">📦</div>
+      <div class="tl-label">Processing</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-icon">🚚</div>
+      <div class="tl-label">Shipped</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-icon">🏠</div>
+      <div class="tl-label">Delivered</div>
+    </div>
+  </div>
+
+  <!-- WhatsApp Box -->
+  <div class="wa-box">
+    <div class="wa-box-title">
+      <span>📱</span> Get Real-Time Updates
+    </div>
+    <p class="wa-box-text">
+      Join our WhatsApp for order tracking, delivery updates, and exclusive ritual tips. 
+      We'll message you only when it matters.
+    </p>
+    <a href="#" class="wa-btn">
+      <span>💬</span> Join WhatsApp Updates
+    </a>
+  </div>
+
+  <!-- Your Routine -->
+  <div class="routine-card">
+    <div class="routine-card-title">Your Ritual Guide</div>
+    <div class="routine-items">
+      <div class="routine-item">
+        <div class="routine-item-num">1</div>
+        <div class="routine-item-name">Marigold Mountain Soap</div>
+        <div class="routine-item-time">Morning & Evening</div>
+      </div>
+      <div class="routine-item">
+        <div class="routine-item-num">2</div>
+        <div class="routine-item-name">Shea Moisture Cream</div>
+        <div class="routine-item-time">After Cleansing</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:rgba(245,239,224,0.35);margin-top:12px;line-height:1.5">
+      Wet skin, lather soap, massage in circular motions. Rinse. Apply cream while skin is damp for best absorption.
+    </p>
+  </div>
+
+  <!-- Refill Reminder -->
+  <div class="refill-cta">
+    <div class="refill-cta-title">Never Run Out</div>
+    <p class="refill-cta-text">Set a refill reminder and we'll notify you 7 days before you run out.</p>
+    <div class="refill-cta-input">
+      <input type="tel" placeholder="+91 98765 43210">
+      <button>Set Reminder</button>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="success-actions">
+    <a href="account.html" class="btn-outline">View Order</a>
+    <a href="category.html" class="btn-primary">Continue Shopping</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="success-footer">
+    <p>Questions? Email us at <a href="mailto:namaste@bighibrothers.com">namaste@bighibrothers.com</a> or message on <a href="#">WhatsApp</a></p>
+  </div>
+</div>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur');
+const curRing = document.getElementById('cur-ring');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  curRing.style.left = e.clientX + 'px';
+  curRing.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-link'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-link'));
+});
+</script>
+
+</body>
+</html>
