@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Bighi Brothers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5EFE0; --forest:#1C3A2E; --forest2:#162D24;
+  --amber:#C8831A; --amberl:#E8A830;
+  --offwhite:#FAF7F2; --charcoal:#2D2D2D; --warm:#8C8070;
+  --border:rgba(28,58,46,0.11);
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'EB Garamond',serif;background:var(--offwhite);color:var(--charcoal);overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:20px 60px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(250,247,242,0.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);transition:all 0.5s var(--ease);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--forest);text-decoration:none;font-weight:500}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{
+  font-family:'Cormorant Garamond',serif;font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(28,58,46,0.65);text-decoration:none;position:relative;transition:color .3s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--amber);
+  transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);
+}
+.nav-links a:hover,.nav-links a.active{color:var(--forest)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-cart{background:none;border:none;cursor:pointer;color:var(--forest);font-size:1.2rem;position:relative}
+.cart-badge{position:absolute;top:-8px;right:-8px;background:var(--amber);color:white;font-size:0.65rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace}
+
+/* HERO */
+.about-hero{
+  padding:160px 80px 100px;
+  background:linear-gradient(135deg,var(--forest) 0%,var(--forest2) 100%);
+  position:relative;overflow:hidden;
+}
+.about-hero::before{
+  content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;
+  border-radius:50%;background:radial-gradient(circle,rgba(200,131,26,0.15) 0%,transparent 65%);
+}
+.about-eyebrow{
+  font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:16px;display:flex;align-items:center;gap:12px;
+}
+.about-eyebrow::before{content:'';width:28px;height:1px;background:var(--amber)}
+.about-title{
+  font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);color:var(--cream);
+  font-weight:700;line-height:1.1;margin-bottom:24px;max-width:800px;
+}
+.about-subtitle{font-size:1.2rem;color:rgba(245,239,224,0.7);max-width:600px;line-height:1.8}
+
+/* STORY SECTION */
+.story-section{padding:100px 80px;max-width:1200px;margin:0 auto}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.story-content{}
+.story-label{
+  font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:16px;
+}
+.story-heading{
+  font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--forest);
+  font-weight:600;line-height:1.2;margin-bottom:24px;
+}
+.story-text{font-size:1.05rem;color:var(--warm);line-height:1.9;margin-bottom:20px}
+.story-image{
+  background:var(--cream);border-radius:4px;height:500px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--forest);
+  font-style:italic;
+}
+
+/* VALUES */
+.values-section{padding:100px 80px;background:var(--cream)}
+.values-header{text-align:center;margin-bottom:60px}
+.values-title{
+  font-family:'Playfair Display',serif;font-size:2rem;color:var(--forest);margin-bottom:16px;
+}
+.values-subtitle{font-size:1rem;color:var(--warm);max-width:500px;margin:0 auto}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;max-width:1200px;margin:0 auto}
+.value-card{
+  background:var(--offwhite);padding:40px 30px;border-radius:4px;text-align:center;
+  transition:transform 0.3s var(--ease);
+}
+.value-card:hover{transform:translateY(-8px)}
+.value-icon{font-size:2.5rem;margin-bottom:20px}
+.value-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--forest);margin-bottom:12px;
+}
+.value-desc{font-size:0.95rem;color:var(--warm);line-height:1.7}
+
+/* TEAM */
+.team-section{padding:100px 80px;max-width:1200px;margin:0 auto}
+.team-header{text-align:center;margin-bottom:60px}
+.team-title{
+  font-family:'Playfair Display',serif;font-size:2rem;color:var(--forest);margin-bottom:16px;
+}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.team-card{text-align:center}
+.team-photo{
+  width:180px;height:180px;border-radius:50%;background:var(--cream);
+  margin:0 auto 24px;display:flex;align-items:center;justify-content:center;
+  font-size:3rem;
+}
+.team-name{
+  font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--forest);margin-bottom:8px;
+}
+.team-role{
+  font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:12px;
+}
+.team-bio{font-size:0.95rem;color:var(--warm);line-height:1.7}
+
+/* CTA */
+.cta-section{
+  padding:120px 80px;background:var(--forest);text-align:center;
+}
+.cta-title{
+  font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--cream);
+  margin-bottom:20px;
+}
+.cta-text{font-size:1.1rem;color:rgba(245,239,224,0.7);margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-button{
+  display:inline-block;background:var(--amber);color:white;
+  padding:16px 40px;font-family:'Cormorant Garamond',serif;font-size:0.9rem;
+  letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;
+  border-radius:2px;transition:background 0.3s;
+}
+.cta-button:hover{background:var(--amberl)}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:60px 80px 40px}
+.f-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;
+  gap:56px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid rgba(245,239,224,0.06);
+}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--cream);margin-bottom:12px}
+.f-tagline{font-size:0.9rem;color:rgba(245,239,224,0.5);line-height:1.75}
+.fcol-t{font-family:'Cormorant Garamond',serif;font-size:0.7rem;letter-spacing:0.24em;text-transform:uppercase;color:rgba(245,239,224,0.85);margin-bottom:18px;font-weight:500}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{color:rgba(245,239,224,0.5);text-decoration:none;font-size:0.9rem;transition:color .3s}
+.flinks a:hover{color:var(--amberl)}
+.f-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.76rem;color:rgba(245,239,224,0.28);font-family:'Cormorant Garamond',serif;
+  letter-spacing:0.06em;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  .about-hero{padding:120px 24px 60px}
+  .story-section{padding:60px 24px}
+  .story-grid{grid-template-columns:1fr;gap:40px}
+  .values-section{padding:60px 24px}
+  .values-grid{grid-template-columns:1fr 1fr;gap:24px}
+  .team-section{padding:60px 24px}
+  .team-grid{grid-template-columns:1fr}
+  .cta-section{padding:80px 24px}
+  .f-top{grid-template-columns:1fr 1fr;gap:32px}
+  footer{padding:48px 24px 32px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="index.html" class="nav-logo">Bighi Brothers</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop/category.html">Shop</a></li>
+    <li><a href="journal/index.html">Journal</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="shop/account.html">Account</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cart" onclick="openCart()">🛒<span class="cart-badge" id="cart-badge">0</span></button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="about-hero">
+  <div class="about-eyebrow">Our Story</div>
+  <h1 class="about-title">Crafted with intention.<br>Made with love.</h1>
+  <p class="about-subtitle">Two brothers, one vision: to bring India's ancient skincare wisdom to your daily ritual. Every product tells a story of heritage, craftsmanship, and pure natural ingredients.</p>
+</section>
+
+<!-- Story -->
+<section class="story-section">
+  <div class="story-grid">
+    <div class="story-content">
+      <div class="story-label">The Beginning</div>
+      <h2 class="story-heading">From our grandmother's kitchen to your bathroom shelf</h2>
+      <p class="story-text">Bighi Brothers began in 2022 in a small village in Kerala, where our grandmother would prepare natural skincare remedies using ingredients from our family farm. What started as a way to share her wisdom with family and friends soon became a mission to bring authentic, handcrafted skincare to conscious consumers everywhere.</p>
+      <p class="story-text">We believe skincare should be simple. No synthetic chemicals, no unpronounceable ingredients—just pure, natural goodness that your skin recognizes and loves.</p>
+    </div>
+    <div class="story-image">[Founders Image]</div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="values-section">
+  <div class="values-header">
+    <h2 class="values-title">What We Stand For</h2>
+    <p class="values-subtitle">Our values guide every decision we make, from sourcing ingredients to packaging our products.</p>
+  </div>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">🌿</div>
+      <h3 class="value-title">100% Natural</h3>
+      <p class="value-desc">Every ingredient comes from nature. No synthetics, no preservatives, no compromises.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤲</div>
+      <h3 class="value-title">Handcrafted</h3>
+      <p class="value-desc">Small batches made by hand in our workshop, ensuring quality in every bar and balm.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">♻️</div>
+      <h3 class="value-title">Sustainable</h3>
+      <p class="value-desc">Plastic-free packaging, ethically sourced ingredients, and a commitment to zero waste.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🇮🇳</div>
+      <h3 class="value-title">Made in India</h3>
+      <p class="value-desc">Supporting local farmers and artisans while celebrating India's rich wellness heritage.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section">
+  <div class="team-header">
+    <h2 class="team-title">Meet the Brothers</h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo">👤</div>
+      <h3 class="team-name">Arjun Bighi</h3>
+      <div class="team-role">Co-Founder & Formulator</div>
+      <p class="team-bio">With a background in Ayurvedic studies and a passion for sustainable living, Arjun leads product development and ensures every formula honors traditional wisdom.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-photo">👤</div>
+      <h3 class="team-name">Vikram Bighi</h3>
+      <div class="team-role">Co-Founder & Operations</div>
+      <p class="team-bio">Vikram brings his business expertise and commitment to ethical sourcing, building relationships with farmers and managing the workshop operations.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-photo">👵</div>
+      <h3 class="team-name">Lakshmi Amma</h3>
+      <div class="team-role">Chief Wisdom Officer</div>
+      <p class="team-bio">Our grandmother and the source of all our knowledge. At 78, she still reviews every new formula and ensures we stay true to our roots.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="cta-title">Begin Your Ritual</h2>
+  <p class="cta-text">Experience the difference of handcrafted, natural skincare. Your skin—and the planet—will thank you.</p>
+  <a href="shop/category.html" class="cta-button">Shop Now</a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="f-top">
+    <div>
+      <div class="f-logo">Bighi Brothers</div>
+      <p class="f-tagline">Handmade natural skincare crafted with love in India. Nourishing your skin with what nature intended.</p>
+    </div>
+    <div>
+      <div class="fcol-t">Shop</div>
+      <ul class="flinks">
+        <li><a href="shop/category.html">All Products</a></li>
+        <li><a href="shop/category.html">Cleanse</a></li>
+        <li><a href="shop/category.html">Moisturize</a></li>
+        <li><a href="shop/category.html">Treat</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fcol-t">Company</div>
+      <ul class="flinks">
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="journal/index.html">Journal</a></li>
+        <li><a href="shop/account.html">Account</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fcol-t">Support</div>
+      <ul class="flinks">
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span>© 2026 Bighi Brothers. All rights reserved.</span>
+    <span>Handmade with love in India</span>
+  </div>
+</footer>
+
+<script>
+// Cart functionality placeholder
+function openCart() {
+  alert('Cart functionality coming soon!');
+}
+
+// Update cart badge
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  const badge = document.getElementById('cart-badge');
+  if (badge) {
+    badge.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+  }
+}
+updateCartBadge();
+</script>
+
+</body>
+</html>
